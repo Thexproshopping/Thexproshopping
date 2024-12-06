@@ -31,19 +31,23 @@ function renderCart() {
     cartTotal.textContent = total;
 }
 
-// Function for checkout (console only)
+// Function for checkout
 function checkout() {
     if (cart.length === 0) {
         alert("Cart is empty!");
         return;
     }
-    alert("Order placed successfully!");
-    console.log("Order Summary:", cart);
+    const orderDetails = cart.map(item => `${item.name} - ₹${item.price}`).join("\n");
+    const summary = `Order Summary:\n${orderDetails}\nTotal: ₹${cart.reduce((sum, item) => sum + item.price, 0)}`;
+    console.log(summary);
+
+    // Simulate sending to email
+    alert("Order summary sent to your email!");
     cart = [];
     renderCart();
 }
 
-// Scroll to Products Section
+// Smooth scroll to Products Section
 function scrollToProducts() {
     document.getElementById("products").scrollIntoView({ behavior: "smooth" });
 }
