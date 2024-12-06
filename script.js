@@ -1,4 +1,3 @@
-// Cart data
 let cart = [];
 
 // Function to add products to the cart
@@ -11,7 +10,7 @@ function addToCart(name, price) {
 function renderCart() {
     const cartItems = document.getElementById("cart-items");
     const cartTotal = document.getElementById("cart-total");
-    cartItems.innerHTML = ""; // Clear previous items
+    cartItems.innerHTML = "";
     let total = 0;
 
     cart.forEach((item, index) => {
@@ -34,20 +33,18 @@ function renderCart() {
 // Function for checkout
 function checkout() {
     if (cart.length === 0) {
-        alert("Cart is empty!");
+        alert("Your cart is empty!");
         return;
     }
-    const orderDetails = cart.map(item => `${item.name} - ₹${item.price}`).join("\n");
-    const summary = `Order Summary:\n${orderDetails}\nTotal: ₹${cart.reduce((sum, item) => sum + item.price, 0)}`;
-    console.log(summary);
-
-    // Simulate sending to email
-    alert("Order summary sent to your email!");
+    const summary = cart
+        .map(item => `${item.name} - ₹${item.price}`)
+        .join("\n");
+    alert(`Order Summary:\n\n${summary}\n\nTotal: ₹${cart.reduce((sum, item) => sum + item.price, 0)}`);
     cart = [];
     renderCart();
 }
 
-// Smooth scroll to Products Section
+// Scroll to Products
 function scrollToProducts() {
     document.getElementById("products").scrollIntoView({ behavior: "smooth" });
 }
