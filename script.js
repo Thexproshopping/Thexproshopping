@@ -1,34 +1,49 @@
-let slideIndex = 0;
-showSlides();
+// Cart data
+let cart = [];
 
-function showSlides() {
-  let slides = document.getElementsByClassName("slide");
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  slideIndex++;
-  if (slideIndex > slides.length) {
-    slideIndex = 1;
-  }
-  slides[slideIndex - 1].style.display = "block";
-  setTimeout(showSlides, 3000); // Change image every 3 seconds
+// Function to add products to the cart
+function addToCart(name, price) {
+    cart.push({ name, price });
+    renderCart();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const menuButton = document.getElementById('menuButton');
-  const dropdownMenu = document.getElementById('dropdownMenu');
+// Function to render cart items
+function renderCart() {
+    const cartItems = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+    cartItems.innerHTML = ""; // Clear previous items
+    let total = 0;
 
-  menuButton.addEventListener('click', () => {
-    dropdownMenu.classList.toggle('show');
-  });
+    cart.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.textContent = `${item.name} - ₹${item.price}`;
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "Remove";
+        removeBtn.onclick = () => {
+            cart.splice(index, 1);
+            renderCart();
+        };
+        div.appendChild(removeBtn);
+        cartItems.appendChild(div);
+        total += item.price;
+    });
 
-  document.addEventListener('click', (event) => {
-    if (!menuButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
-      dropdownMenu.classList.remove('show');
+    cartTotal.textContent = total;
+}
+
+// Function for checkout (console only)
+function checkout() {
+    if (cart.length === 0) {
+        alert("Cart is empty!");
+        return;
     }
-  });
+    alert("Order placed successfully!");
+    console.log("Order Summary:", cart);
+    cart = [];
+    renderCart();
+}
 
-  dropdownMenu.addEventListener('mouseleave', () => {
-    dropdownMenu.classList.remove('show');
-  });
-});
+// Scroll to Products Section
+function scrollToProducts() {
+    document.getElementById("products").scrollIntoView({ behavior: "smooth" });
+}
