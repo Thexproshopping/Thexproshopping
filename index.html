@@ -3,48 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheXproShopping - Futuristic Experience</title>
+    <title>TheXproShopping</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="navbar">
-            <div class="logo">TheXproShopping</div>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">TheXproShopping</h1>
             <nav>
-                <ul>
+                <ul class="nav-links">
                     <li><a href="#products">Products</a></li>
                     <li><a href="cart.html">Cart</a></li>
                     <li><a href="#about">About Us</a></li>
                 </ul>
             </nav>
         </div>
-        <div class="hero-content">
-            <h1>Redefining Shopping</h1>
-            <p>Experience the future of e-commerce with cutting-edge design and functionality.</p>
-            <button onclick="scrollToSection('#products')">Shop Now</button>
-        </div>
     </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Redefining Online Shopping</h1>
+            <p>Experience the future of e-commerce. Shop the best products, built for your convenience.</p>
+            <button onclick="scrollToSection('#products')">Start Shopping</button>
+        </div>
+    </section>
 
     <!-- Products Section -->
     <section id="products" class="products">
-        <h2>Explore Our Collection</h2>
+        <h2>Our Products</h2>
         <div class="product-grid">
-            <!-- Product 1 -->
             <div class="product-card">
                 <img src="images/watch.jpg" alt="Smart Watch">
                 <h3>Smart Watch</h3>
                 <p class="price">₹2999</p>
                 <button onclick="addToCart('Smart Watch', 2999, 'images/watch.jpg')">Add to Cart</button>
             </div>
-            <!-- Product 2 -->
             <div class="product-card">
                 <img src="images/earbuds.jpg" alt="Wireless Earbuds">
                 <h3>Wireless Earbuds</h3>
                 <p class="price">₹1999</p>
                 <button onclick="addToCart('Wireless Earbuds', 1999, 'images/earbuds.jpg')">Add to Cart</button>
             </div>
-            <!-- Product 3 -->
             <div class="product-card">
                 <img src="images/mouse.jpg" alt="Gaming Mouse">
                 <h3>Gaming Mouse</h3>
@@ -56,18 +57,15 @@
 
     <!-- About Section -->
     <section id="about" class="about">
-        <div class="about-content">
+        <div class="container">
             <h2>About Us</h2>
-            <p>
-                At TheXproShopping, we’re crafting a future where shopping is not just an activity but an unparalleled experience.
-                From innovative products to an intuitive interface, we are here to make your life easier.
-            </p>
+            <p>TheXproShopping is your go-to destination for premium products and unmatched shopping experiences. Discover products that you'll love, all from the comfort of your home.</p>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-content">
+        <div class="container">
             <p>&copy; 2024 TheXproShopping. All rights reserved.</p>
         </div>
     </footer>
