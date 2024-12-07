@@ -12,7 +12,7 @@
         <div class="logo">TheXproShopping</div>
         <nav class="navbar">
             <a href="#products">Products</a>
-            <a href="#cart">Cart</a>
+            <a href="cart.html">Cart</a>
             <a href="#about">About</a>
         </nav>
     </header>
@@ -28,36 +28,28 @@
     <section id="products" class="products-section">
         <h2>Our Products</h2>
         <div class="product-list">
-            <!-- Example Product 1 -->
+            <!-- Product 1 -->
             <div class="product-card">
-                <img src="https://via.placeholder.com/150" alt="Product 1">
+                <img src="images/watch.jpg" alt="Smart Watch">
                 <h3>Smart Watch</h3>
                 <p>₹2999</p>
-                <button onclick="addToCart('Smart Watch', 2999)">Add to Cart</button>
+                <button onclick="addToCart('Smart Watch', 2999, 'images/watch.jpg')">Add to Cart</button>
             </div>
-            <!-- Example Product 2 -->
+            <!-- Product 2 -->
             <div class="product-card">
-                <img src="https://via.placeholder.com/150" alt="Product 2">
+                <img src="images/earbuds.jpg" alt="Wireless Earbuds">
                 <h3>Wireless Earbuds</h3>
                 <p>₹1999</p>
-                <button onclick="addToCart('Wireless Earbuds', 1999)">Add to Cart</button>
+                <button onclick="addToCart('Wireless Earbuds', 1999, 'images/earbuds.jpg')">Add to Cart</button>
             </div>
-            <!-- Example Product 3 -->
+            <!-- Product 3 -->
             <div class="product-card">
-                <img src="https://via.placeholder.com/150" alt="Product 3">
+                <img src="images/mouse.jpg" alt="Gaming Mouse">
                 <h3>Gaming Mouse</h3>
                 <p>₹1499</p>
-                <button onclick="addToCart('Gaming Mouse', 1499)">Add to Cart</button>
+                <button onclick="addToCart('Gaming Mouse', 1499, 'images/mouse.jpg')">Add to Cart</button>
             </div>
         </div>
-    </section>
-
-    <!-- Cart Section -->
-    <section id="cart" class="cart-section">
-        <h2>Your Cart</h2>
-        <div id="cart-items"></div>
-        <h3>Total: ₹<span id="cart-total">0</span></h3>
-        <button id="checkout-button" onclick="checkout()">Checkout</button>
     </section>
 
     <!-- About Section -->
