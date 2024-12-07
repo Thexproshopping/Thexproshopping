@@ -9,16 +9,19 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="logo">TheXproShopping</div>
-        <nav class="navbar">
-            <a href="index.html">Home</a>
-            <a href="#cart">Cart</a>
-            <a href="index.html#about">About</a>
-        </nav>
+        <div class="container">
+            <h1 class="logo">TheXproShopping</h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <!-- Cart Section -->
-    <section class="cart-section">
+    <section class="cart">
         <h2>Your Cart</h2>
         <div id="cart-items"></div>
         <h3>Total: ₹<span id="cart-total">0</span></h3>
@@ -26,7 +29,9 @@
     </section>
 
     <footer class="footer">
-        <p>&copy; 2024 TheXproShopping. Happy Shopping!</p>
+        <div class="container">
+            <p>&copy; 2024 TheXproShopping. All rights reserved.</p>
+        </div>
     </footer>
 
     <script src="script.js"></script>
