@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart - TheXproShopping</title>
+    <title>Cart - eXpro Shopping</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <h1 class="logo">TheXproShopping</h1>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
-                </ul>
+            <h1 class="logo">eXpro Shopping</h1>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="#about">About Us</a>
             </nav>
         </div>
     </header>
@@ -25,12 +23,20 @@
         <h2>Your Cart</h2>
         <div id="cart-items"></div>
         <h3>Total: ₹<span id="cart-total">0</span></h3>
-        <button id="checkout-button" onclick="checkout()">Checkout</button>
+
+        <!-- User Info Form -->
+        <form id="checkout-form">
+            <h3>Checkout</h3>
+            <input type="text" id="user-name" placeholder="Your Name" required>
+            <input type="email" id="user-email" placeholder="Your Email" required>
+            <input type="tel" id="user-phone" placeholder="Your Phone Number" required>
+            <button type="button" onclick="checkout()">Place Order</button>
+        </form>
     </section>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 TheXproShopping. All rights reserved.</p>
+            <p>&copy; 2024 eXpro Shopping. All Rights Reserved.</p>
         </div>
     </footer>
 
