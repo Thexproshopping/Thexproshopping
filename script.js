@@ -1,10 +1,10 @@
-let cart = [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 // Add to Cart
 function addToCart(name, price, image) {
     cart.push({ name, price, image });
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert(`${name} has been added to your cart!`);
+    alert(`${name} added to cart!`);
 }
 
 // Render Cart
@@ -16,7 +16,11 @@ function renderCart() {
     let total = 0;
 
     cartItems.forEach((item) => {
-        cartContainer.innerHTML += `<p>${item.name} - ₹${item.price}</p>`;
+        cartContainer.innerHTML += `
+            <div class="cart-item">
+                <img src="${item.image}" alt="${item.name}">
+                <p>${item.name} - ₹${item.price}</p>
+            </div>`;
         total += item.price;
     });
 
@@ -29,24 +33,21 @@ function checkout() {
     const email = document.getElementById("user-email").value;
     const phone = document.getElementById("user-phone").value;
 
-    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-    const orderSummary = cartItems.map(item => `${item.name} - ₹${item.price}`).join(", ");
-
-    // Use EmailJS to send the order summary
-    emailjs.send("service_xxxxx", "template_xxxxx", {
-        user_name: name,
-        user_email: email,
-        user_phone: phone,
-        order_details: orderSummary,
-        order_total: document.getElementById("cart-total").textContent
-    }).then(() => {
-        alert("Order placed successfully!");
-        localStorage.removeItem("cart");
+    if (name && email && phone) {
+        alert(`Thank you, ${name}! Your order has been placed.`);
+        localStorage.clear();
         location.reload();
-    });
+    } else {
+        alert("Please fill all the details.");
+    }
 }
 
-// Initialize Cart Page
-if (location.pathname.endsWith("cart.html")) {
+// Scroll to Section
+function scrollToSection(sectionId) {
+    document.querySelector(sectionId).scrollIntoView({ behavior: "smooth" });
+}
+
+// Render Cart Page
+if (location.pathname.includes("cart.html")) {
     renderCart();
 }
