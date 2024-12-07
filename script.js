@@ -1,28 +1,28 @@
 let cart = [];
 
-// Function to add products to the cart
-function addToCart(name, price) {
-    cart.push({ name, price });
-    renderCart();
+// Add product to cart
+function addToCart(name, price, image) {
+    cart.push({ name, price, image });
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(`${name} added to cart!`);
 }
 
-// Function to render cart items
+// Render cart items on the cart page
 function renderCart() {
     const cartItems = document.getElementById("cart-items");
     const cartTotal = document.getElementById("cart-total");
+    cart = JSON.parse(localStorage.getItem("cart")) || [];
     cartItems.innerHTML = "";
     let total = 0;
 
     cart.forEach((item, index) => {
         const div = document.createElement("div");
-        div.textContent = `${item.name} - ₹${item.price}`;
-        const removeBtn = document.createElement("button");
-        removeBtn.textContent = "Remove";
-        removeBtn.onclick = () => {
-            cart.splice(index, 1);
-            renderCart();
-        };
-        div.appendChild(removeBtn);
+        div.className = "cart-item";
+        div.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+            <span>${item.name} - ₹${item.price}</span>
+            <button onclick="removeFromCart(${index})">Remove</button>
+        `;
         cartItems.appendChild(div);
         total += item.price;
     });
@@ -30,21 +30,26 @@ function renderCart() {
     cartTotal.textContent = total;
 }
 
-// Function for checkout
+// Remove item from cart
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+}
+
+// Checkout
 function checkout() {
     if (cart.length === 0) {
         alert("Your cart is empty!");
         return;
     }
-    const summary = cart
-        .map(item => `${item.name} - ₹${item.price}`)
-        .join("\n");
-    alert(`Order Summary:\n\n${summary}\n\nTotal: ₹${cart.reduce((sum, item) => sum + item.price, 0)}`);
+    alert("Order placed successfully!");
+    localStorage.clear();
     cart = [];
     renderCart();
 }
 
-// Scroll to Products
-function scrollToProducts() {
-    document.getElementById("products").scrollIntoView({ behavior: "smooth" });
+// Auto-render cart on the cart page
+if (location.pathname.includes("cart.html")) {
+    renderCart();
 }
