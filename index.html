@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>eXpro Shopping</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        emailjs.init("YOUR_USER_ID"); <!-- Replace YOUR_USER_ID with your EmailJS User ID -->
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -32,7 +36,6 @@
     <section id="products" class="products">
         <h2>Our Products</h2>
         <div class="product-grid">
-            <!-- Product Cards -->
             <div class="product-card">
                 <img src="images/product1.jpg" alt="Smart Watch">
                 <h3>Smart Watch</h3>
@@ -45,23 +48,10 @@
                 <p class="price">₹1999</p>
                 <button onclick="addToCart('Wireless Earbuds', 1999, 'images/product2.jpg')">Add to Cart</button>
             </div>
-            <div class="product-card">
-                <img src="images/product3.jpg" alt="Gaming Mouse">
-                <h3>Gaming Mouse</h3>
-                <p class="price">₹1499</p>
-                <button onclick="addToCart('Gaming Mouse', 1499, 'images/product3.jpg')">Add to Cart</button>
-            </div>
-            <div class="product-card">
-                <img src="images/product4.jpg" alt="Keyboard">
-                <h3>Mechanical Keyboard</h3>
-                <p class="price">₹2499</p>
-                <button onclick="addToCart('Mechanical Keyboard', 2499, 'images/product4.jpg')">Add to Cart</button>
-            </div>
-            <div class="product-card">
-                <img src="images/product5.jpg" alt="Power Bank">
-                <h3>Power Bank</h3>
-                <p class="price">₹1199</p>
-                <button onclick="addToCart('Power Bank', 1199, 'images/product5.jpg')">Add to Cart</button>
-            </div>
-            <div class="product-card">
-       
+            <!-- Add more products here -->
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
