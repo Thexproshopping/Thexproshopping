@@ -3,30 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eXpro Shopping</title>
+    <title>TheXproShopping - Home</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <h1>eXpro Shopping</h1>
-            <nav>
-                <a href="#products">Products</a>
-                <a href="cart.html">Cart</a>
-            </nav>
-        </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">TheXproShopping</div>
+        <nav>
+            <a href="#products">Products</a>
+            <a href="cart.html">Cart</a>
+            <a href="#about">About</a>
+        </nav>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero">
-        <h2>Discover Amazing Deals!</h2>
-        <p>Your one-stop shop for quality products at unbeatable prices.</p>
-        <button onclick="scrollToSection('#products')">Browse Products</button>
+        <h2>Welcome to TheXproShopping</h2>
+        <p>Your one-stop shop for amazing products!</p>
+        <button onclick="scrollToSection('products')">Shop Now</button>
     </section>
 
-    <section id="products" class="products">
-        <h2>Our Products</h2>
-        <div class="product-grid">
-            <!-- Dynamic 3x3 or 4x4 product grid -->
+    <!-- Products Section -->
+    <section id="products">
+        <h2>Products</h2>
+        <div class="product-container">
+            <!-- Product Cards -->
             <div class="product-card">
                 <img src="images/product1.jpg" alt="Smart Watch">
                 <h3>Smart Watch</h3>
@@ -34,25 +36,24 @@
                 <button onclick="addToCart('Smart Watch', 2999, 'images/product1.jpg')">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="images/product2.jpg" alt="Headphones">
-                <h3>Headphones</h3>
-                <p class="price">₹2499</p>
-                <button onclick="addToCart('Headphones', 2499, 'images/product2.jpg')">Add to Cart</button>
+                <img src="images/product2.jpg" alt="Wireless Earbuds">
+                <h3>Wireless Earbuds</h3>
+                <p class="price">₹1599</p>
+                <button onclick="addToCart('Wireless Earbuds', 1599, 'images/product2.jpg')">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="images/product3.jpg" alt="Gaming Mouse">
-                <h3>Gaming Mouse</h3>
-                <p class="price">₹1499</p>
-                <button onclick="addToCart('Gaming Mouse', 1499, 'images/product3.jpg')">Add to Cart</button>
+                <img src="images/product3.jpg" alt="Fitness Band">
+                <h3>Fitness Band</h3>
+                <p class="price">₹1999</p>
+                <button onclick="addToCart('Fitness Band', 1999, 'images/product3.jpg')">Add to Cart</button>
             </div>
-            <!-- Add more product cards as needed -->
         </div>
     </section>
 
-    <footer>
-        <p>© 2024 eXpro Shopping. All rights reserved.</p>
-    </footer>
-
-    <script src="script.js"></script>
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Us</h2>
+        <p>TheXproShopping is committed to delivering high-quality products at the best prices. Customer satisfaction is our priority.</p>
+    </section>
 </body>
 </html>
