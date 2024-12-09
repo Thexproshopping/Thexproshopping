@@ -1,93 +1,91 @@
-// Initialize Cart from Local Storage
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// Add to Cart Function
 function addToCart(productName, productPrice) {
     const existingProduct = cart.find(item => item.name === productName);
-
     if (existingProduct) {
-        existingProduct.quantity += 1; // If product exists, increase quantity
+        existingProduct.quantity++;
     } else {
-        cart.push({ name: productName, price: productPrice, quantity: 1 }); // Add new product
+        cart.push({ name: productName, price: productPrice, quantity: 1 });
     }
-
-    updateCartStorage();
+    localStorage.setItem("cart", JSON.stringify(cart));
     alert(`${productName} added to cart!`);
 }
 
-// Render Cart Function (for cart.html)
 function renderCart() {
     const cartItemsContainer = document.querySelector(".cart-items");
-    const cartCount = document.getElementById("cart-count");
     const cartTotal = document.getElementById("cart-total");
 
-    cartItemsContainer.innerHTML = ""; // Clear current cart items
-
-    if (!cart.length) {
-        cartItemsContainer.innerHTML = "<p>Your cart is empty!</p>";
-        cartCount.textContent = "0";
-        cartTotal.textContent = "0";
-        return;
-    }
-
+    cartItemsContainer.innerHTML = "";
     let total = 0;
-    cart.forEach((item, index) => {
-        total += item.price * item.quantity;
 
-        // Render each cart item
+    cart.forEach((item, index) => {
         cartItemsContainer.innerHTML += `
             <div class="cart-item">
-                <h3>${item.name}</h3>
-                <p>₹${item.price} x ${item.quantity}</p>
-                <button onclick="changeQuantity(${index}, 1)">+</button>
-                <button onclick="changeQuantity(${index}, -1)">-</button>
-                <button onclick="removeFromCart(${index})">Remove</button>
+                <p>${item.name} - ₹${item.price} x ${item.quantity}</p>
+                <button onclick="updateQuantity(${index}, 1)">+</button>
+                <button onclick="updateQuantity(${index}, -1)">-</button>
+                <button onclick="removeItem(${index})">Remove</button>
             </div>
         `;
+        total += item.price * item.quantity;
     });
 
-    cartCount.textContent = cart.length; // Update cart count
-    cartTotal.textContent = total; // Update total price
+    cartTotal.textContent = total;
 }
 
-// Change Quantity Function
-function changeQuantity(index, change) {
+function updateQuantity(index, change) {
     cart[index].quantity += change;
-
     if (cart[index].quantity <= 0) {
-        cart.splice(index, 1); // Remove item if quantity is 0 or less
+        cart.splice(index, 1);
     }
-
-    updateCartStorage();
-}
-
-// Remove From Cart Function
-function removeFromCart(index) {
-    cart.splice(index, 1); // Remove item at index
-    updateCartStorage();
-}
-
-// Update Cart in Local Storage and Refresh UI
-function updateCartStorage() {
     localStorage.setItem("cart", JSON.stringify(cart));
-    if (location.pathname.includes("cart.html")) {
-        renderCart();
-    }
+    renderCart();
 }
 
-// Checkout Function
+function removeItem(index) {
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+}
+
 function checkout() {
-    if (!cart.length) {
-        alert("Your cart is empty!");
-        return;
-    }
+    const name = document.getElementById("user-name").value;
+    const email = document.getElementById("user-email").value;
+    const phone = document.getElementById("user-phone").value;
 
-    alert("Checkout successful! Thank you for your purchase.");
-    cart = []; // Clear cart after checkout
-    updateCartStorage();
+    if (name && email && phone) {
+        const cartSummary = cart
+            .map(item => `${item.name} (₹${item.price} x ${item.quantity})`)
+            .join(", ");
+        const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+        const templateParams = {
+            from_name: name,
+            from_email: email,
+            phone: phone,
+            cart_summary: cartSummary,
+            total_price: totalPrice,
+        };
+
+        emailjs
+            .send("service_qo8786l", "template_546v0pe", templateParams, "6TnvROhWhdqwmbcjC")
+            .then(
+                () => {
+                    alert("Order placed successfully and summary emailed!");
+                    cart = [];
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    renderCart();
+                },
+                (error) => {
+                    alert("Failed to send email. Please try again.");
+                    console.error("EmailJS Error:", error);
+                }
+            );
+    } else {
+        alert("Please fill out all fields!");
+    }
 }
 
-// Initialize Cart on Page Load
 if (location.pathname.includes("cart.html")) {
-    renderCart(); // Only render cart if on cart page
+    renderCart();
 }
