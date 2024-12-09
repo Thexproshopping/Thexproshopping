@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheXpro Shopping - Home</title>
+    <title>TheXproShopping - E-Commerce</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <h1 class="logo">TheXpro Shopping</h1>
-            <nav class="nav-links">
+            <h1 class="logo">TheXproShopping</h1>
+            <nav class="navbar">
                 <a href="#products">Products</a>
                 <a href="cart.html">Cart</a>
                 <a href="#about">About</a>
+                <a href="login.html">Login</a>
             </nav>
         </div>
     </header>
@@ -22,44 +23,31 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h2>Welcome to TheXpro Shopping</h2>
-            <p>Discover premium products at unbeatable prices.</p>
+            <h2>Welcome to TheXproShopping</h2>
+            <p>Your one-stop shop for amazing products at unbeatable prices!</p>
             <button onclick="scrollToSection('#products')">Shop Now</button>
         </div>
+    </section>
+
+    <!-- Search & Filter Section -->
+    <section class="search-filter">
+        <input type="text" id="search-bar" placeholder="Search Products..." onkeyup="searchProducts()">
+        <select id="filter-price" onchange="filterProductsByPrice()">
+            <option value="all">All Products</option>
+            <option value="under-500">Under ₹500</option>
+            <option value="500-1000">₹500 - ₹1000</option>
+            <option value="1000-2000">₹1000 - ₹2000</option>
+            <option value="above-2000">Above ₹2000</option>
+        </select>
     </section>
 
     <!-- Products Section -->
     <section id="products" class="products">
         <h2>Our Products</h2>
-        <div class="product-grid">
-            <!-- Product 1 -->
-            <div class="product-card">
-                <img src="images/product1.jpg" alt="Smart Watch">
-                <h3>Smart Watch</h3>
-                <p>₹2999</p>
-                <button onclick="addToCart('Smart Watch', 2999, 'images/product1.jpg')">Add to Cart</button>
-            </div>
-            <!-- Product 2 -->
-            <div class="product-card">
-                <img src="images/product2.jpg" alt="Wireless Earbuds">
-                <h3>Wireless Earbuds</h3>
-                <p>₹1999</p>
-                <button onclick="addToCart('Wireless Earbuds', 1999, 'images/product2.jpg')">Add to Cart</button>
-            </div>
-            <!-- Product 3 -->
-            <div class="product-card">
-                <img src="images/product3.jpg" alt="Gaming Mouse">
-                <h3>Gaming Mouse</h3>
-                <p>₹1299</p>
-                <button onclick="addToCart('Gaming Mouse', 1299, 'images/product3.jpg')">Add to Cart</button>
-            </div>
+        <div class="product-container" id="product-container">
+            <!-- Products will be displayed here -->
         </div>
     </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 TheXpro Shopping. All rights reserved.</p>
-    </footer>
 
     <script src="script.js"></script>
 </body>
