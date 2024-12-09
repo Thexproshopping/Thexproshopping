@@ -1,27 +1,27 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function addToCart(productName, productPrice) {
-    const existingProduct = cart.find(item => item.name === productName);
+function addToCart(name, price, image) {
+    const existingProduct = cart.find(item => item.name === name);
     if (existingProduct) {
         existingProduct.quantity++;
     } else {
-        cart.push({ name: productName, price: productPrice, quantity: 1 });
+        cart.push({ name, price, image, quantity: 1 });
     }
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert(`${productName} added to cart!`);
+    alert(`${name} added to cart!`);
 }
 
 function renderCart() {
-    const cartItemsContainer = document.querySelector(".cart-items");
+    const cartItems = document.querySelector(".cart-items");
     const cartTotal = document.getElementById("cart-total");
-
-    cartItemsContainer.innerHTML = "";
+    cartItems.innerHTML = "";
     let total = 0;
 
     cart.forEach((item, index) => {
-        cartItemsContainer.innerHTML += `
-            <div class="cart-item">
-                <p>${item.name} - ₹${item.price} x ${item.quantity}</p>
+        cartItems.innerHTML += `
+            <div>
+                <img src="${item.image}" alt="${item.name}" style="width: 50px;">
+                ${item.name} - ₹${item.price} x ${item.quantity}
                 <button onclick="updateQuantity(${index}, 1)">+</button>
                 <button onclick="updateQuantity(${index}, -1)">-</button>
                 <button onclick="removeItem(${index})">Remove</button>
@@ -54,35 +54,30 @@ function checkout() {
     const phone = document.getElementById("user-phone").value;
 
     if (name && email && phone) {
-        const cartSummary = cart
+        const summary = cart
             .map(item => `${item.name} (₹${item.price} x ${item.quantity})`)
             .join(", ");
-        const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
         const templateParams = {
             from_name: name,
-            from_email: email,
+            email: email,
             phone: phone,
-            cart_summary: cartSummary,
-            total_price: totalPrice,
+            summary: summary,
+            total: total,
         };
 
         emailjs
             .send("service_qo8786l", "template_546v0pe", templateParams, "6TnvROhWhdqwmbcjC")
-            .then(
-                () => {
-                    alert("Order placed successfully and summary emailed!");
-                    cart = [];
-                    localStorage.setItem("cart", JSON.stringify(cart));
-                    renderCart();
-                },
-                (error) => {
-                    alert("Failed to send email. Please try again.");
-                    console.error("EmailJS Error:", error);
-                }
-            );
+            .then(() => {
+                alert("Order placed successfully and summary sent!");
+                localStorage.clear();
+                cart = [];
+                renderCart();
+            })
+            .catch(error => alert("Email failed: " + error));
     } else {
-        alert("Please fill out all fields!");
+        alert("Please fill all fields.");
     }
 }
 
