@@ -1,3 +1,4 @@
+// Initialize Cart from Local Storage
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 // Add to Cart Function
@@ -5,22 +6,22 @@ function addToCart(productName, productPrice) {
     const existingProduct = cart.find(item => item.name === productName);
 
     if (existingProduct) {
-        existingProduct.quantity += 1;
+        existingProduct.quantity += 1; // If product exists, increase quantity
     } else {
-        cart.push({ name: productName, price: productPrice, quantity: 1 });
+        cart.push({ name: productName, price: productPrice, quantity: 1 }); // Add new product
     }
 
     updateCartStorage();
     alert(`${productName} added to cart!`);
 }
 
-// Render Cart
+// Render Cart Function (for cart.html)
 function renderCart() {
     const cartItemsContainer = document.querySelector(".cart-items");
     const cartCount = document.getElementById("cart-count");
     const cartTotal = document.getElementById("cart-total");
 
-    cartItemsContainer.innerHTML = "";
+    cartItemsContainer.innerHTML = ""; // Clear current cart items
 
     if (!cart.length) {
         cartItemsContainer.innerHTML = "<p>Your cart is empty!</p>";
@@ -33,6 +34,7 @@ function renderCart() {
     cart.forEach((item, index) => {
         total += item.price * item.quantity;
 
+        // Render each cart item
         cartItemsContainer.innerHTML += `
             <div class="cart-item">
                 <h3>${item.name}</h3>
@@ -44,41 +46,48 @@ function renderCart() {
         `;
     });
 
-    cartCount.textContent = cart.length;
-    cartTotal.textContent = total;
+    cartCount.textContent = cart.length; // Update cart count
+    cartTotal.textContent = total; // Update total price
 }
 
-// Change Quantity
+// Change Quantity Function
 function changeQuantity(index, change) {
     cart[index].quantity += change;
 
     if (cart[index].quantity <= 0) {
-        cart.splice(index, 1);
+        cart.splice(index, 1); // Remove item if quantity is 0 or less
     }
 
     updateCartStorage();
 }
 
-// Remove from Cart
+// Remove From Cart Function
 function removeFromCart(index) {
-    cart.splice(index, 1);
+    cart.splice(index, 1); // Remove item at index
     updateCartStorage();
 }
 
-// Update Cart Storage
+// Update Cart in Local Storage and Refresh UI
 function updateCartStorage() {
     localStorage.setItem("cart", JSON.stringify(cart));
-    renderCart();
+    if (location.pathname.includes("cart.html")) {
+        renderCart();
+    }
 }
 
 // Checkout Function
 function checkout() {
-    alert("Checkout successful!");
-    cart = [];
+    if (!cart.length) {
+        alert("Your cart is empty!");
+        return;
+    }
+
+    alert("Checkout successful! Thank you for your purchase.");
+    cart = []; // Clear cart after checkout
     updateCartStorage();
 }
 
-// Initialize
+// Initialize Cart on Page Load
 if (location.pathname.includes("cart.html")) {
-    renderCart();
+    renderCart(); // Only render cart if on cart page
 }
