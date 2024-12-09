@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>eXpro Shopping</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script>
-        emailjs.init("YOUR_USER_ID"); <!-- Replace YOUR_USER_ID with your EmailJS User ID -->
-    </script>
 </head>
 <body>
     <!-- Header -->
@@ -27,7 +23,7 @@
     <section class="hero">
         <div class="container">
             <h1>Welcome to eXpro Shopping</h1>
-            <p>Your one-stop shop for the best products!</p>
+            <p>Find premium products at unbeatable prices!</p>
             <button onclick="scrollToSection('#products')">Shop Now</button>
         </div>
     </section>
@@ -36,21 +32,20 @@
     <section id="products" class="products">
         <h2>Our Products</h2>
         <div class="product-grid">
+            <!-- Product Cards -->
             <div class="product-card">
                 <img src="images/product1.jpg" alt="Smart Watch">
                 <h3>Smart Watch</h3>
                 <p class="price">₹2999</p>
                 <button onclick="addToCart('Smart Watch', 2999, 'images/product1.jpg')">Add to Cart</button>
             </div>
-            <div class="product-card">
-                <img src="images/product2.jpg" alt="Wireless Earbuds">
-                <h3>Wireless Earbuds</h3>
-                <p class="price">₹1999</p>
-                <button onclick="addToCart('Wireless Earbuds', 1999, 'images/product2.jpg')">Add to Cart</button>
-            </div>
-            <!-- Add more products here -->
+            <!-- Add more product cards here -->
         </div>
     </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 eXpro Shopping. All rights reserved.</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
