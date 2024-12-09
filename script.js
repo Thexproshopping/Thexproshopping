@@ -1,77 +1,84 @@
-let cart = []; // Stores cart items
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function addToCart(name, price, image) {
-    const existingProduct = cart.find(item => item.name === name);
+// Add to Cart Function
+function addToCart(productName, productPrice) {
+    const existingProduct = cart.find(item => item.name === productName);
+
     if (existingProduct) {
-        existingProduct.quantity++;
+        existingProduct.quantity += 1;
     } else {
-        cart.push({ name, price, image, quantity: 1 });
+        cart.push({ name: productName, price: productPrice, quantity: 1 });
     }
-    saveCart();
+
+    updateCartStorage();
+    alert(`${productName} added to cart!`);
 }
 
-function removeFromCart(index) {
-    cart.splice(index, 1);
-    saveCart();
-}
-
-function increaseQuantity(index) {
-    cart[index].quantity++;
-    saveCart();
-}
-
-function decreaseQuantity(index) {
-    if (cart[index].quantity > 1) {
-        cart[index].quantity--;
-    } else {
-        removeFromCart(index);
-    }
-    saveCart();
-}
-
-function saveCart() {
-    localStorage.setItem("cart", JSON.stringify(cart));
-    renderCart();
-}
-
+// Render Cart
 function renderCart() {
-    const cartContainer = document.querySelector('.cart-container');
-    const cartCount = document.querySelector('#cart-count');
-    const totalPrice = document.querySelector('#total-price');
-    cartContainer.innerHTML = '';
+    const cartItemsContainer = document.querySelector(".cart-items");
+    const cartCount = document.getElementById("cart-count");
+    const cartTotal = document.getElementById("cart-total");
+
+    cartItemsContainer.innerHTML = "";
 
     if (!cart.length) {
-        cartContainer.innerHTML = '<p>Your cart is empty!</p>';
-        cartCount.textContent = '0';
-        totalPrice.textContent = '₹0';
+        cartItemsContainer.innerHTML = "<p>Your cart is empty!</p>";
+        cartCount.textContent = "0";
+        cartTotal.textContent = "0";
         return;
     }
 
     let total = 0;
     cart.forEach((item, index) => {
         total += item.price * item.quantity;
-        cartContainer.innerHTML += `
+
+        cartItemsContainer.innerHTML += `
             <div class="cart-item">
-                <p>${item.name} (₹${item.price} x ${item.quantity})</p>
-                <div>
-                    <button onclick="increaseQuantity(${index})">+</button>
-                    <button onclick="decreaseQuantity(${index})">-</button>
-                </div>
+                <h3>${item.name}</h3>
+                <p>₹${item.price} x ${item.quantity}</p>
+                <button onclick="changeQuantity(${index}, 1)">+</button>
+                <button onclick="changeQuantity(${index}, -1)">-</button>
+                <button onclick="removeFromCart(${index})">Remove</button>
             </div>
         `;
     });
 
     cartCount.textContent = cart.length;
-    totalPrice.textContent = `₹${total}`;
+    cartTotal.textContent = total;
 }
 
+// Change Quantity
+function changeQuantity(index, change) {
+    cart[index].quantity += change;
+
+    if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+    }
+
+    updateCartStorage();
+}
+
+// Remove from Cart
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCartStorage();
+}
+
+// Update Cart Storage
+function updateCartStorage() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+}
+
+// Checkout Function
 function checkout() {
-    alert('Checkout complete!');
+    alert("Checkout successful!");
     cart = [];
-    saveCart();
+    updateCartStorage();
 }
 
-if (location.pathname.includes('cart.html')) {
-    cart = JSON.parse(localStorage.getItem("cart") || '[]');
+// Initialize
+if (location.pathname.includes("cart.html")) {
     renderCart();
 }
