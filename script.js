@@ -1,3 +1,6 @@
+// Initialize EmailJS with your public key
+emailjs.init('6TnvROhWhdqwmbcjC');
+
 // Sample product data
 const products = [
     { id: 1, name: 'Smart Watch', price: 2999, image: 'https://via.placeholder.com/250', category: 'above-2000' },
@@ -12,6 +15,9 @@ const products = [
     { id: 10, name: 'Air Conditioner', price: 35000, image: 'https://via.placeholder.com/250', category: 'above-2000' }
 ];
 
+// Initialize cart from localStorage or as an empty array
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
 // Render products
 function renderProducts(products) {
     const container = document.getElementById('product-container');
@@ -22,108 +28,101 @@ function renderProducts(products) {
         card.innerHTML = `
             <img src="${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
-            <p class="price">₹${product.price}</p>
-            <button onclick="addToCart(${product.id}, '${product.name}', ${product.price}, '${product.image}')">Add to Cart</button>
+            <p>₹${product.price}</p>
+            <button onclick="addToCart('${product.name}', ${product.price}, '${product.image}')">Add to Cart</button>
         `;
         container.appendChild(card);
     });
 }
 
-// Product Search
+// Add product to cart
+function addToCart(name, price, image) {
+    cart.push({ name, price, image });
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(`${name} added to cart!`);
+}
+
+// Render cart items
+function renderCart() {
+    const cartItems = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+    cartItems.innerHTML = "";
+    let total = 0;
+    cart.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.classList.add("cart-item");
+        div.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <p>${item.name}</p>
+            <span>₹${item.price}</span>
+            <button onclick="removeItem(${index})">Remove</button>
+        `;
+        cartItems.appendChild(div);
+        total += item.price;
+    });
+    cartTotal.textContent = total;
+}
+
+// Remove item from cart
+function removeItem(index) {
+    cart.splice(index, 1); // Remove item from the cart array
+    localStorage.setItem("cart", JSON.stringify(cart)); // Update cart in localStorage
+    renderCart(); // Re-render the cart
+}
+
+// Checkout and send order details via EmailJS
+function checkout() {
+    const name = document.getElementById("user-name").value;
+    const email = document.getElementById("user-email").value;
+    const phone = document.getElementById("user-phone").value;
+
+    if (name && email && phone) {
+        // Send the order details to EmailJS
+        emailjs.send("service_qo8786l", "template_546v0pe", {
+            from_name: name,
+            to_name: "TheXproShopping",
+            message: `
+                Order Summary:
+                Name: ${name}
+                Email: ${email}
+                Phone: ${phone}
+                Items: ${JSON.stringify(cart)}
+            ` 
+        })
+        .then(function(response) {
+            alert("Order placed successfully! Check your email for the order summary.");
+            localStorage.clear();  // Clear cart after successful order
+            window.location.href = "index.html";  // Redirect to home page
+        })
+        .catch(function(error) {
+            console.error("Error sending email:", error);
+        });
+    } else {
+        alert("Please fill all the fields.");
+    }
+}
+
+// Product Search function
 function searchProducts() {
-    const searchTerm = document.getElementById('search-bar').value.toLowerCase();
-    const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchTerm));
+    const query = document.getElementById('search-bar').value.toLowerCase();
+    const filteredProducts = products.filter(product => product.name.toLowerCase().includes(query));
     renderProducts(filteredProducts);
 }
 
 // Filter products by price
 function filterProductsByPrice() {
-    const filterValue = document.getElementById('filter-price').value;
+    const filter = document.getElementById('filter-price').value;
     let filteredProducts;
-
-    if (filterValue === 'all') {
+    if (filter === 'all') {
         filteredProducts = products;
     } else {
-        filteredProducts = products.filter(product => product.category === filterValue);
+        filteredProducts = products.filter(product => product.category === filter);
     }
-
     renderProducts(filteredProducts);
 }
 
-// Cart functionality
-let cart = [];
-
-function addToCart(id, name, price, image) {
-    const existingProduct = cart.find(item => item.id === id);
-    
-    if (existingProduct) {
-        existingProduct.quantity += 1;
-    } else {
-        cart.push({ id, name, price, image, quantity: 1 });
-    }
-
-    updateCart();
+// Initialize products and cart
+renderProducts(products);
+if (location.pathname.includes("cart.html")) {
+    renderCart();
 }
-
-function removeFromCart(id) {
-    cart = cart.filter(item => item.id !== id);
-    updateCart();
-}
-
-function updateCart() {
-    const cartItems = document.getElementById('cart-items');
-    const cartTotal = document.getElementById('cart-total');
-    cartItems.innerHTML = '';
-    let total = 0;
-    cart.forEach(item => {
-        const itemElement = document.createElement('div');
-        itemElement.classList.add('cart-item');
-        itemElement.innerHTML = `
-            <img src="${item.image}" alt="${item.name}">
-            <p>${item.name}</p>
-            <span>₹${item.price}</span>
-            <button onclick="removeFromCart(${item.id})">Remove</button>
-        `;
-        cartItems.appendChild(itemElement);
-        total += item.price * item.quantity;
-    });
-
-    cartTotal.textContent = total;
-}
-
-function checkout() {
-    const name = document.getElementById('user-name').value;
-    const email = document.getElementById('user-email').value;
-    const phone = document.getElementById('user-phone').value;
-
-    if (name && email && phone) {
-        alert('Order placed successfully!');
-        sendOrderEmail(name, email, phone, cart);
-    } else {
-        alert('Please fill out all fields');
-    }
-}
-
-// Function to send order details to the email
-function sendOrderEmail(name, email, phone, cart) {
-    const orderDetails = {
-        name,
-        email,
-        phone,
-        items: cart.map(item => `${item.name} - ₹${item.price}`).join(', '),
-        total: cart.reduce((acc, item) => acc + (item.price * item.quantity), 0),
-    };
-
-    emailjs.send('service_qo8786l', 'template_546v0pe', orderDetails, '6TnvROhWhdqwmbcjC')
-        .then(response => {
-            console.log('Order email sent', response);
-        })
-        .catch(error => {
-            console.log('Error sending email', error);
-        });
-}
-
-// Initialize products on page load
-document.addEventListener('DOMContentLoaded', () => {
-    renderProducts(products);
-});
