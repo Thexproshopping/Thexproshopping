@@ -1,9 +1,14 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function addToCart(name, price, image) {
-    cart.push({ name, price, image });
+    const existingItem = cart.find(item => item.name === name);
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ name, price, image, quantity: 1 });
+    }
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert(`${name} has been added to your cart!`);
+    renderCart();
 }
 
 function renderCart() {
@@ -12,57 +17,47 @@ function renderCart() {
     cartItems.innerHTML = "";
     let total = 0;
 
-    cart.forEach((item) => {
+    cart.forEach((item, index) => {
         cartItems.innerHTML += `
             <div class="cart-item">
                 <img src="${item.image}" alt="${item.name}">
-                <p>${item.name}</p>
-                <span>₹${item.price}</span>
+                <p>${item.name} (x${item.quantity})</p>
+                <div>
+                    <button onclick="increaseQuantity(${index})">+</button>
+                    <button onclick="decreaseQuantity(${index})">-</button>
+                    <button onclick="removeItem(${index})">Remove</button>
+                </div>
+                <span>₹${item.price * item.quantity}</span>
             </div>
         `;
-        total += item.price;
+        total += item.price * item.quantity;
     });
 
     cartTotal.textContent = total;
 }
 
-function checkout() {
-    const name = document.getElementById("user-name").value;
-    const email = document.getElementById("user-email").value;
-    const phone = document.getElementById("user-phone").value;
-
-    if (!name || !email || !phone) {
-        alert("Please fill in all the required details.");
-        return;
-    }
-
-    const cartSummary = cart.map(item => `${item.name} - ₹${item.price}`).join("\n");
-    const totalPrice = cart.reduce((total, item) => total + item.price, 0);
-
-    const templateParams = {
-        from_name: name,
-        from_email: email,
-        from_phone: phone,
-        message: cartSummary,
-        total_price: totalPrice
-    };
-
-    emailjs
-        .send("service_qo8786l", "template_546v0pe", templateParams, "6TnvROhWhdqwmbcjC")
-        .then(
-            (response) => {
-                alert("Order placed successfully! A confirmation email has been sent.");
-                localStorage.clear();
-                location.reload();
-            },
-            (error) => {
-                alert("Failed to send order details. Please try again later.");
-                console.error("EmailJS Error:", error);
-            }
-        );
+function increaseQuantity(index) {
+    cart[index].quantity += 1;
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
 }
 
-// Render cart if on the cart page
-if (location.pathname.includes("cart.html")) {
+function decreaseQuantity(index) {
+    if (cart[index].quantity > 1) {
+        cart[index].quantity -= 1;
+    } else {
+        cart.splice(index, 1);
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
     renderCart();
+}
+
+function removeItem(index) {
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+}
+
+function checkout() {
+    // Add your EmailJS checkout logic here
 }
