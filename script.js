@@ -1,87 +1,64 @@
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 function addToCart(name, price, image) {
-    const existingProduct = cart.find(item => item.name === name);
-    if (existingProduct) {
-        existingProduct.quantity++;
+    const existing = cart.find(item => item.name === name);
+    if (existing) {
+        existing.quantity++;
     } else {
         cart.push({ name, price, image, quantity: 1 });
     }
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem('cart', JSON.stringify(cart));
     alert(`${name} added to cart!`);
 }
 
 function renderCart() {
-    const cartItems = document.querySelector(".cart-items");
-    const cartTotal = document.getElementById("cart-total");
-    cartItems.innerHTML = "";
+    const cartItems = document.getElementById('cart-items');
+    const cartTotal = document.getElementById('cart-total');
+    cartItems.innerHTML = '';
     let total = 0;
 
-    cart.forEach((item, index) => {
-        cartItems.innerHTML += `
-            <div>
-                <img src="${item.image}" alt="${item.name}" style="width: 50px;">
-                ${item.name} - ₹${item.price} x ${item.quantity}
-                <button onclick="updateQuantity(${index}, 1)">+</button>
-                <button onclick="updateQuantity(${index}, -1)">-</button>
-                <button onclick="removeItem(${index})">Remove</button>
-            </div>
+    cart.forEach(item => {
+        const div = document.createElement('div');
+        div.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" style="width:50px;">
+            <p>${item.name} - ₹${item.price} x ${item.quantity}</p>
+            <button onclick="updateQuantity('${item.name}', 1)">+</button>
+            <button onclick="updateQuantity('${item.name}', -1)">-</button>
         `;
+        cartItems.appendChild(div);
         total += item.price * item.quantity;
     });
 
     cartTotal.textContent = total;
 }
 
-function updateQuantity(index, change) {
-    cart[index].quantity += change;
-    if (cart[index].quantity <= 0) {
-        cart.splice(index, 1);
-    }
-    localStorage.setItem("cart", JSON.stringify(cart));
+function updateQuantity(name, delta) {
+    const item = cart.find(i => i.name === name);
+    if (!item) return;
+    item.quantity += delta;
+    if (item.quantity <= 0) cart = cart.filter(i => i.name !== name);
+    localStorage.setItem('cart', JSON.stringify(cart));
     renderCart();
 }
 
 function checkout() {
-    const name = document.getElementById("user-name").value;
-    const email = document.getElementById("user-email").value;
-    const phone = document.getElementById("user-phone").value;
+    const name = document.getElementById('user-name').value;
+    const email = document.getElementById('user-email').value;
+    const phone = document.getElementById('user-phone').value;
 
-    if (name && email && phone) {
-        const summary = cart
-            .map(item => `${item.name} (₹${item.price} x ${item.quantity})`)
-            .join(", ");
-        const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    if (!name || !email || !phone) return alert('All fields are required.');
 
-        const templateParams = {
-            from_name: name,
-            email: email,
-            phone: phone,
-            summary: summary,
-            total: total,
-        };
+    const templateParams = {
+        user_name: name,
+        user_email: email,
+        user_phone: phone,
+        cart_items: cart.map(item => `${item.name} (₹${item.price} x ${item.quantity})`).join(', '),
+        total: document.getElementById('cart-total').textContent
+    };
 
-        emailjs
-            .send("service_qo8786l", "template_546v0pe", templateParams, "6TnvROhWhdqwmbcjC")
-            .then(() => alert("Order placed successfully!"))
-            .catch(err => alert("Error sending email: " + err));
-
-        cart = [];
-        localStorage.setItem("cart", JSON.stringify(cart));
-        renderCart();
-    } else {
-        alert("Please fill out all fields.");
-    }
+    emailjs.send('service_qo8786l', 'template_546v0pe', templateParams, '6TnvROhWhdqwmbcjC')
+        .then(() => alert('Order placed!'))
+        .catch(err => alert('Error placing order: ' + err));
 }
 
-function removeItem(index) {
-    cart.splice(index, 1);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    renderCart();
-}
-
-function scrollToSection(section) {
-    document.querySelector(section).scrollIntoView({ behavior: "smooth" });
-}
-
-document.addEventListener("DOMContentLoaded", renderCart);
+if (location.pathname.includes('cart.html')) renderCart();
