@@ -18,14 +18,15 @@
     </header>
 
     <section class="hero">
-        <h2>Shop the Best Deals Now!</h2>
+        <h2>Discover Amazing Deals!</h2>
+        <p>Your one-stop shop for quality products at unbeatable prices.</p>
         <button onclick="scrollToSection('#products')">Browse Products</button>
     </section>
 
     <section id="products" class="products">
         <h2>Our Products</h2>
         <div class="product-grid">
-            <!-- Add your products here -->
+            <!-- Dynamic 3x3 or 4x4 product grid -->
             <div class="product-card">
                 <img src="images/product1.jpg" alt="Smart Watch">
                 <h3>Smart Watch</h3>
@@ -38,6 +39,13 @@
                 <p class="price">₹2499</p>
                 <button onclick="addToCart('Headphones', 2499, 'images/product2.jpg')">Add to Cart</button>
             </div>
+            <div class="product-card">
+                <img src="images/product3.jpg" alt="Gaming Mouse">
+                <h3>Gaming Mouse</h3>
+                <p class="price">₹1499</p>
+                <button onclick="addToCart('Gaming Mouse', 1499, 'images/product3.jpg')">Add to Cart</button>
+            </div>
+            <!-- Add more product cards as needed -->
         </div>
     </section>
 
