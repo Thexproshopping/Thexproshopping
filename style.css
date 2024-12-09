@@ -7,10 +7,8 @@ body {
     color: #333;
 }
 
-.container {
-    width: 90%;
-    margin: auto;
-    max-width: 1200px;
+h1, h2, h3, p {
+    margin: 0.5rem 0;
 }
 
 /* Header */
@@ -45,22 +43,6 @@ body {
     font-size: 1.2rem;
 }
 
-.hero button {
-    background: #007bff;
-    color: white;
-    padding: 1rem;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 1rem;
-    transition: background 0.3s;
-}
-
-.hero button:hover {
-    background: #0056b3;
-}
-
 /* Search & Filter Section */
 .search-filter {
     display: flex;
@@ -69,37 +51,37 @@ body {
     padding: 1rem;
 }
 
-.search-filter input {
+#search-bar {
     padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    font-size: 1rem;
+    width: 300px;
 }
 
-.search-filter select {
+#filter-price {
     padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    font-size: 1rem;
 }
 
 /* Products Section */
-.products {
+#products {
     padding: 2rem;
 }
 
 .product-container {
     display: flex;
-    gap: 1.5rem;
+    gap: 2rem;
     flex-wrap: wrap;
     justify-content: center;
 }
 
 .product-card {
     background: white;
+    border: 1px solid #ddd;
     border-radius: 10px;
-    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 250px;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
     transition: transform 0.3s;
 }
 
@@ -130,26 +112,31 @@ body {
 }
 
 /* Cart Section */
-.cart-section {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
+.cart {
     padding: 2rem;
 }
 
-.cart-items {
-    flex: 2;
-    background: white;
-    border-radius: 10px;
+.cart #cart-items {
+    margin: 1rem 0;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    margin-bottom: 1rem;
+}
+
+.cart-item img {
+    max-width: 50px;
+    border-radius: 5px;
 }
 
 .cart-summary {
-    flex: 1;
-    background: #f8f9fa;
-    padding: 1rem;
-    border: 1px solid #ddd;
+    padding: 2rem;
+    background: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -167,12 +154,4 @@ body {
 
 .cart-summary button:hover {
     background: #0056b3;
-}
-
-/* Footer */
-.footer {
-    background: #007bff;
-    color: white;
-    padding: 1rem;
-    text-align: center;
 }
