@@ -40,13 +40,14 @@ function addToCart(name, price, image) {
     cart.push({ name, price, image });
     localStorage.setItem("cart", JSON.stringify(cart));
     alert(`${name} added to cart!`);
+    renderCart(); // Update cart immediately
 }
 
 // Render cart items
 function renderCart() {
     const cartItems = document.getElementById("cart-items");
     const cartTotal = document.getElementById("cart-total");
-    cartItems.innerHTML = "";
+    cartItems.innerHTML = ""; // Clear previous items
     let total = 0;
     cart.forEach((item, index) => {
         const div = document.createElement("div");
@@ -60,7 +61,7 @@ function renderCart() {
         cartItems.appendChild(div);
         total += item.price;
     });
-    cartTotal.textContent = total;
+    cartTotal.textContent = `₹${total}`;
 }
 
 // Remove item from cart
