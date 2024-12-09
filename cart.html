@@ -6,9 +6,11 @@
     <title>Cart - eXpro Shopping</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        emailjs.init("6TnvROhWhdqwmbcjC"); <!-- Initialize EmailJS -->
+    </script>
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="container">
             <h1 class="logo">eXpro Shopping</h1>
@@ -18,13 +20,11 @@
         </div>
     </header>
 
-    <!-- Cart Section -->
     <section class="cart">
         <h2>Your Cart</h2>
         <div id="cart-items"></div>
         <h3>Total: ₹<span id="cart-total">0</span></h3>
 
-        <!-- User Info Form -->
         <form id="checkout-form">
             <h3>Checkout</h3>
             <input type="text" id="user-name" placeholder="Your Name" required>
