@@ -3,42 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopPro - Your Online Store</title>
+    <title>eXpro Shopping</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="header">
-        <h1>ShopPro</h1>
-        <nav>
-            <a href="cart.html">View Cart</a>
-        </nav>
+    <header>
+        <div class="header-container">
+            <h1>eXpro Shopping</h1>
+            <nav>
+                <a href="#products">Products</a>
+                <a href="cart.html">Cart</a>
+            </nav>
+        </div>
     </header>
 
     <section class="hero">
-        <h2>Welcome to ShopPro</h2>
-        <p>Your favorite products at the best prices.</p>
+        <h2>Shop the Best Deals Now!</h2>
+        <button onclick="scrollToSection('#products')">Browse Products</button>
     </section>
 
-    <section id="products">
+    <section id="products" class="products">
         <h2>Our Products</h2>
-        <div class="product-container">
+        <div class="product-grid">
+            <!-- Add your products here -->
             <div class="product-card">
-                <img src="images/product1.jpg" alt="Product 1">
-                <h3>Product 1</h3>
-                <p>₹500</p>
-                <button onclick="addToCart('Product 1', 500)">Add to Cart</button>
+                <img src="images/product1.jpg" alt="Smart Watch">
+                <h3>Smart Watch</h3>
+                <p class="price">₹2999</p>
+                <button onclick="addToCart('Smart Watch', 2999, 'images/product1.jpg')">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="images/product2.jpg" alt="Product 2">
-                <h3>Product 2</h3>
-                <p>₹1000</p>
-                <button onclick="addToCart('Product 2', 1000)">Add to Cart</button>
+                <img src="images/product2.jpg" alt="Headphones">
+                <h3>Headphones</h3>
+                <p class="price">₹2499</p>
+                <button onclick="addToCart('Headphones', 2499, 'images/product2.jpg')">Add to Cart</button>
             </div>
         </div>
     </section>
 
-    <footer class="footer">
-        <p>&copy; 2024 ShopPro. All rights reserved.</p>
+    <footer>
+        <p>© 2024 eXpro Shopping. All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
