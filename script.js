@@ -42,12 +42,6 @@ function updateQuantity(index, change) {
     renderCart();
 }
 
-function removeItem(index) {
-    cart.splice(index, 1);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    renderCart();
-}
-
 function checkout() {
     const name = document.getElementById("user-name").value;
     const email = document.getElementById("user-email").value;
@@ -69,18 +63,25 @@ function checkout() {
 
         emailjs
             .send("service_qo8786l", "template_546v0pe", templateParams, "6TnvROhWhdqwmbcjC")
-            .then(() => {
-                alert("Order placed successfully and summary sent!");
-                localStorage.clear();
-                cart = [];
-                renderCart();
-            })
-            .catch(error => alert("Email failed: " + error));
+            .then(() => alert("Order placed successfully!"))
+            .catch(err => alert("Error sending email: " + err));
+
+        cart = [];
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
     } else {
-        alert("Please fill all fields.");
+        alert("Please fill out all fields.");
     }
 }
 
-if (location.pathname.includes("cart.html")) {
+function removeItem(index) {
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
     renderCart();
 }
+
+function scrollToSection(section) {
+    document.querySelector(section).scrollIntoView({ behavior: "smooth" });
+}
+
+document.addEventListener("DOMContentLoaded", renderCart);
