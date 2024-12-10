@@ -24,6 +24,18 @@
             padding: 15px;
             text-align: center;
         }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #007bff;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
         .cart-section {
             margin: 20px 0;
         }
@@ -84,12 +96,26 @@
         #checkout-form button:hover {
             background: #0056b3;
         }
+        .home-button {
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .home-button:hover {
+            background: #218838;
+        }
     </style>
 </head>
 <body>
-    <header class="header">
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="index.html" class="home-button">Home</a>
         <h1>TheXproShopping - Your Cart</h1>
-    </header>
+    </div>
 
     <div class="container">
         <!-- Cart Section -->
