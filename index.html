@@ -5,244 +5,201 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TheXproShopping - E-Commerce</title>
     <style>
-        /* General Styling */
+        /* General Body Styling */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
+            background-color: #f4f4f4;
             color: #333;
         }
-
         h1, h2, h3, p {
             margin: 0.5rem 0;
         }
-
-        /* Header */
-        .header {
-            background: #007bff;
-            color: white;
-            padding: 1rem 2rem;
+        .container {
+            width: 90%;
+            margin: auto;
+            max-width: 1200px;
+        }
+        /* Navbar */
+        .navbar {
+            background-color: #007bff;
+            padding: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .header .navbar a {
-            margin: 0 1rem;
-            text-decoration: none;
             color: white;
         }
-
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1.2em;
+        }
+        .navbar .cart-count {
+            background: #e74c3c;
+            border-radius: 50%;
+            padding: 5px 10px;
+        }
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 2rem;
-            background: #007bff;
+            background: linear-gradient(135deg, #007bff, #0056b3);
             color: white;
+            padding: 50px 0;
         }
-
+        .hero h1 {
+            font-size: 2.5rem;
+        }
         .hero button {
-            background-color: #fff;
+            background: #fff;
             color: #007bff;
-            padding: 0.8rem 1.5rem;
             border: none;
-            cursor: pointer;
-            border-radius: 25px;
-            transition: background 0.3s;
-        }
-
-        .hero button:hover {
-            background-color: #0056b3;
-            color: white;
-        }
-
-        /* Search & Filter Section */
-        .search-filter {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: #f0f0f0;
-        }
-
-        .search-filter input, .search-filter select {
-            padding: 0.5rem;
-            border: 1px solid #ddd;
+            padding: 10px 20px;
             border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
         }
-
         /* Products Section */
-        .product-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1rem;
-            padding: 2rem;
+        .products {
+            padding: 20px 0;
         }
-
-        .product-card {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 1rem;
+        .products h2 {
             text-align: center;
+            margin-bottom: 20px;
+        }
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .product-card {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+            width: calc(25% - 20px);
         }
-
-        .product-card:hover {
-            transform: scale(1.05);
-        }
-
         .product-card img {
             max-width: 100%;
             height: auto;
-            border-radius: 8px;
+            border-radius: 5px;
         }
-
+        .product-card h3 {
+            margin: 10px 0;
+        }
+        .product-card p {
+            font-size: 1.2rem;
+            color: #007bff;
+        }
         .product-card button {
             background: #007bff;
             color: white;
             border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 20px;
+            padding: 10px 15px;
+            border-radius: 5px;
             cursor: pointer;
-            margin-top: 1rem;
-            transition: background 0.3s;
+            margin-top: 10px;
+            font-size: 1em;
         }
-
         .product-card button:hover {
             background: #0056b3;
         }
-
-        /* Cart Section */
-        .cart-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem;
-        }
-
-        .cart-items {
-            width: 100%;
-            max-width: 800px;
-            background: white;
-            padding: 1rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
-        }
-
-        .cart-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 1rem 0;
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
-
-        .cart-item img {
-            max-width: 60px;
-            height: auto;
-            margin-right: 1rem;
-        }
-
-        .checkout-form input {
-            width: 100%;
-            padding: 1rem;
-            margin: 0.5rem 0;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-
-        .checkout-form button {
-            width: 100%;
-            padding: 1rem;
+        /* Footer */
+        footer {
             background: #007bff;
             color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .checkout-form button:hover {
-            background: #0056b3;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <h1 class="logo">TheXproShopping</h1>
-            <nav class="navbar">
-                <a href="#products">Products</a>
-                <a href="#cart-section">Cart</a>
-                <a href="#about">About</a>
-            </nav>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div>TheXproShopping</div>
+        <div>
+            <a href="#products">Products</a>
+            <a href="cart.html">Cart <span class="cart-count" id="cart-count">0</span></a>
+            <a href="#about">About</a>
         </div>
-    </header>
+    </nav>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h2>Welcome to TheXproShopping</h2>
+            <h1>Welcome to TheXproShopping</h1>
             <p>Your one-stop shop for amazing products at unbeatable prices!</p>
             <button onclick="scrollToSection('#products')">Shop Now</button>
         </div>
     </section>
 
-    <!-- Search & Filter Section -->
-    <section class="search-filter">
-        <input type="text" id="search-bar" placeholder="Search Products..." onkeyup="searchProducts()">
-        <select id="filter-price" onchange="filterProductsByPrice()">
-            <option value="all">All Products</option>
-            <option value="under-500">Under ₹500</option>
-            <option value="500-1000">₹500 - ₹1000</option>
-            <option value="1000-2000">₹1000 - ₹2000</option>
-            <option value="above-2000">Above ₹2000</option>
-        </select>
-    </section>
-
     <!-- Products Section -->
     <section id="products" class="products">
         <h2>Our Products</h2>
-        <div class="product-container" id="product-container">
-            <!-- Products will be rendered here -->
-        </div>
+        <div class="product-container" id="product-container"></div>
     </section>
 
-    <!-- Cart Section -->
-    <section id="cart-section" class="cart-section">
-        <h2>Your Cart</h2>
-        <div id="cart-items"></div>
-        <h3>Total: ₹<span id="cart-total">0</span></h3>
-        <div class="checkout-form">
-            <h3>Checkout</h3>
-            <input type="text" id="user-name" placeholder="Your Name" required>
-            <input type="email" id="user-email" placeholder="Your Email" required>
-            <input type="tel" id="user-phone" placeholder="Your Phone Number" required>
-            <button type="button" onclick="checkout()">Place Order</button>
-        </div>
-    </section>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 TheXproShopping. All rights reserved.</p>
+    </footer>
 
     <script>
+        // Product Data
         const products = [
-            { id: 1, name: 'Smart Watch', price: 2999, image: 'https://via.placeholder.com/250', category: 'above-2000' },
-            { id: 2, name: 'Wireless Earbuds', price: 799, image: 'https://via.placeholder.com/250', category: '500-1000' },
-            { id: 3, name: 'Gaming Headset', price: 1500, image: 'https://via.placeholder.com/250', category: '1000-2000' },
-            { id: 4, name: 'Smartphone', price: 12000, image: 'https://via.placeholder.com/250', category: 'above-2000' }
+            { id: 1, name: "Smart Watch", price: 2999, image: "https://via.placeholder.com/250" },
+            { id: 2, name: "Wireless Earbuds", price: 799, image: "https://via.placeholder.com/250" },
+            { id: 3, name: "Gaming Headset", price: 1500, image: "https://via.placeholder.com/250" },
+            { id: 4, name: "Smartphone", price: 12000, image: "https://via.placeholder.com/250" },
+            { id: 5, name: "Bluetooth Speaker", price: 1200, image: "https://via.placeholder.com/250" }
         ];
+
+        // Render Products
+        function renderProducts() {
+            const productContainer = document.getElementById("product-container");
+            products.forEach(product => {
+                productContainer.innerHTML += `
+                    <div class="product-card">
+                        <img src="${product.image}" alt="${product.name}">
+                        <h3>${product.name}</h3>
+                        <p>₹${product.price}</p>
+                        <button onclick="addToCart(${product.id})">Add to Cart</button>
+                    </div>
+                `;
+            });
+        }
+
+        // Cart Functionality
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        function renderProducts(products) { /* Render Products */ }
-        function addToCart(name, price, image) { /* Add to Cart */ }
-        function renderCart() { /* Render Cart */ }
-        function removeItem(index) { /* Remove from Cart */ }
-        function checkout() { /* Checkout */ }
-        renderProducts(products);
+        const cartCount = document.getElementById("cart-count");
+
+        function updateCartCount() {
+            cartCount.textContent = cart.length;
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            if (product) {
+                cart.push(product);
+                localStorage.setItem("cart", JSON.stringify(cart));
+                updateCartCount();
+                alert(`${product.name} has been added to your cart!`);
+            }
+        }
+
+        // Initialize
+        renderProducts();
+        updateCartCount();
+
+        // Scroll to Section
+        function scrollToSection(section) {
+            document.querySelector(section).scrollIntoView({ behavior: "smooth" });
+        }
     </script>
 </body>
 </html>
