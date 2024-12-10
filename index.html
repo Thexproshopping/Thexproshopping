@@ -10,17 +10,20 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #f8f9fa;
             color: #333;
         }
+
         h1, h2, h3, p {
             margin: 0.5rem 0;
         }
+
         .container {
             width: 90%;
             margin: auto;
             max-width: 1200px;
         }
+
         /* Navbar */
         .navbar {
             background-color: #007bff;
@@ -30,17 +33,21 @@
             align-items: center;
             color: white;
         }
+
         .navbar a {
             color: white;
             text-decoration: none;
             margin: 0 10px;
             font-size: 1.2em;
         }
+
         .navbar .cart-count {
             background: #e74c3c;
             border-radius: 50%;
             padding: 5px 10px;
+            font-weight: bold;
         }
+
         /* Hero Section */
         .hero {
             text-align: center;
@@ -48,9 +55,11 @@
             color: white;
             padding: 50px 0;
         }
+
         .hero h1 {
             font-size: 2.5rem;
         }
+
         .hero button {
             background: #fff;
             color: #007bff;
@@ -60,20 +69,28 @@
             cursor: pointer;
             font-size: 1.1em;
         }
+
+        .hero button:hover {
+            background: #e0e0e0;
+        }
+
         /* Products Section */
         .products {
             padding: 20px 0;
         }
+
         .products h2 {
             text-align: center;
             margin-bottom: 20px;
         }
+
         .product-container {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
             justify-content: center;
         }
+
         .product-card {
             background: white;
             border: 1px solid #ddd;
@@ -82,19 +99,28 @@
             border-radius: 5px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: calc(25% - 20px);
+            transition: transform 0.2s;
         }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
         .product-card img {
             max-width: 100%;
             height: auto;
             border-radius: 5px;
         }
+
         .product-card h3 {
             margin: 10px 0;
         }
+
         .product-card p {
             font-size: 1.2rem;
             color: #007bff;
         }
+
         .product-card button {
             background: #007bff;
             color: white;
@@ -105,9 +131,11 @@
             margin-top: 10px;
             font-size: 1em;
         }
+
         .product-card button:hover {
             background: #0056b3;
         }
+
         /* Footer */
         footer {
             background: #007bff;
@@ -115,6 +143,16 @@
             text-align: center;
             padding: 10px 0;
             margin-top: 20px;
+        }
+
+        footer a {
+            color: #e0e0e0;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        footer a:hover {
+            color: white;
         }
     </style>
 </head>
@@ -124,7 +162,7 @@
         <div>TheXproShopping</div>
         <div>
             <a href="#products">Products</a>
-            <a href="cart.html">Cart <span class="cart-count" id="cart-count">0</span></a>
+            <a href="#cart">Cart <span class="cart-count" id="cart-count">0</span></a>
             <a href="#about">About</a>
         </div>
     </nav>
@@ -146,7 +184,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 TheXproShopping. All rights reserved.</p>
+        <p>&copy; 2024 TheXproShopping. All rights reserved. | <a href="#about">About Us</a></p>
     </footer>
 
     <script>
