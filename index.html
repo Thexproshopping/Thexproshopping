@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheXproShopping - E-Commerce 2045</title>
+    <title>TheXproShopping - Next-Gen E-Commerce</title>
     <style>
-        /* General Styling */
+        /* General Styles */
         * {
             margin: 0;
             padding: 0;
@@ -15,19 +15,8 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f8f9fa;
+            background: #f5f5f7;
             color: #333;
-            overflow-x: hidden;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        button {
-            cursor: pointer;
-            border: none;
         }
 
         .container {
@@ -36,63 +25,67 @@
             max-width: 1200px;
         }
 
+        button {
+            cursor: pointer;
+            border: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
         /* Navbar */
         .navbar {
-            background: linear-gradient(90deg, #007bff, #0056b3);
-            color: white;
-            padding: 15px 20px;
+            background: #ffffff;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 15px 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .navbar .logo {
             font-size: 1.8rem;
             font-weight: bold;
-        }
-
-        .navbar .links a {
-            margin: 0 15px;
-            color: white;
-            font-size: 1rem;
-            transition: color 0.3s;
-        }
-
-        .navbar .links a:hover {
-            color: #f8f9fa;
+            color: #4a4aff;
         }
 
         .navbar .cart {
             display: flex;
             align-items: center;
+            gap: 10px;
         }
 
         .navbar .cart img {
-            width: 24px;
-            margin-right: 8px;
+            width: 30px;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
         }
 
         .navbar .cart-count {
-            background: #e74c3c;
+            background: linear-gradient(135deg, #4a4aff, #1f1fbf);
             color: white;
-            padding: 5px 10px;
+            padding: 5px 12px;
             border-radius: 20px;
+            font-size: 0.9rem;
         }
 
         /* Hero Section */
         .hero {
-            padding: 50px 20px;
             text-align: center;
-            background-color: #007bff;
+            padding: 70px 20px;
+            background: linear-gradient(135deg, #4a4aff, #1f1fbf);
             color: white;
+            border-radius: 20px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.2rem;
             margin-bottom: 20px;
         }
 
@@ -102,39 +95,28 @@
         }
 
         .hero button {
-            background: #0056b3;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
+            background: #ffffff;
+            color: #4a4aff;
+            padding: 15px 30px;
+            border-radius: 30px;
             font-size: 1.1rem;
+            transition: all 0.3s;
         }
 
         .hero button:hover {
-            background: #003f8c;
-        }
-
-        /* Filter Section */
-        .filter-section {
-            padding: 20px;
-            background-color: #e9ecef;
-            margin-bottom: 30px;
-        }
-
-        .filter-section select {
-            padding: 10px;
-            font-size: 1rem;
-            margin-right: 10px;
+            background: #e0e0ff;
         }
 
         /* Products Section */
         .products {
-            padding: 20px;
+            padding: 40px 20px;
+            text-align: center;
         }
 
         .products h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #007bff;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #4a4aff;
         }
 
         .product-container {
@@ -144,45 +126,59 @@
         }
 
         .product-card {
-            background: white;
-            border-radius: 10px;
+            background: #ffffff;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            position: relative;
         }
 
         .product-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
 
         .product-card img {
             width: 100%;
+            border-bottom: 1px solid #ddd;
         }
 
-        .product-card h3,
+        .product-card h3 {
+            font-size: 1.2rem;
+            margin: 15px 0;
+        }
+
         .product-card p {
-            text-align: center;
-            padding: 10px;
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 20px;
         }
 
         .product-card button {
-            background: #007bff;
+            background: #4a4aff;
             color: white;
-            padding: 10px;
-            width: 100%;
+            padding: 10px 20px;
+            border-radius: 20px;
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 0.3s;
         }
 
         .product-card button:hover {
-            background: #0056b3;
+            background: #1f1fbf;
         }
 
         /* Footer */
         footer {
-            background: #007bff;
+            background: #4a4aff;
             color: white;
             text-align: center;
             padding: 20px;
             margin-top: 30px;
+            border-radius: 10px 10px 0 0;
         }
     </style>
 </head>
@@ -191,41 +187,28 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">TheXproShopping</div>
-        <div class="links">
-            <a href="#products">Products</a>
-            <a href="#cart" class="cart">
-                <img src="cart-icon.png" alt="Cart Icon">
-                Cart <span class="cart-count" id="cart-count">0</span>
-            </a>
+        <div class="cart">
+            <img src="cart-icon.png" alt="Cart">
+            <div class="cart-count" id="cart-count">0</div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
         <h1>Welcome to TheXproShopping</h1>
-        <p>Discover amazing products at unbeatable prices.</p>
-        <button onclick="scrollToSection('#products')">Shop Now</button>
-    </section>
-
-    <!-- Filter Section -->
-    <section class="filter-section">
-        <label for="price-filter">Sort by Price:</label>
-        <select id="price-filter" onchange="filterProducts()">
-            <option value="all">All</option>
-            <option value="low">Low to High</option>
-            <option value="high">High to Low</option>
-        </select>
+        <p>Your one-stop destination for all things awesome. Shop with ease and confidence.</p>
+        <button onclick="scrollToSection('#products')">Start Shopping</button>
     </section>
 
     <!-- Products Section -->
     <section id="products" class="products">
-        <h2>Our Exclusive Products</h2>
+        <h2>Our Bestselling Products</h2>
         <div class="product-container" id="product-container"></div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2045 TheXproShopping. All rights reserved.</p>
+        <p>&copy; 2045 TheXproShopping. All Rights Reserved.</p>
     </footer>
 
     <script>
@@ -237,12 +220,12 @@
             { id: 5, name: "Bluetooth Speaker", price: 1200, image: "product5.jpg" }
         ];
 
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
         const productContainer = document.getElementById("product-container");
         const cartCount = document.getElementById("cart-count");
 
-        function renderProducts(productList = products) {
-            productContainer.innerHTML = productList.map(product => `
+        function renderProducts() {
+            productContainer.innerHTML = products.map(product => `
                 <div class="product-card">
                     <img src="${product.image}" alt="${product.name}">
                     <h3>${product.name}</h3>
@@ -257,23 +240,15 @@
             cart.push(product);
             localStorage.setItem("cart", JSON.stringify(cart));
             updateCartCount();
-            alert(`${product.name} has been added to your cart!`);
+            alert(`${product.name} added to your cart!`);
         }
 
         function updateCartCount() {
             cartCount.textContent = cart.length;
         }
 
-        function filterProducts() {
-            const filter = document.getElementById("price-filter").value;
-            let filteredProducts = [...products];
-            if (filter === "low") filteredProducts.sort((a, b) => a.price - b.price);
-            if (filter === "high") filteredProducts.sort((a, b) => b.price - a.price);
-            renderProducts(filteredProducts);
-        }
-
-        function scrollToSection(section) {
-            document.querySelector(section).scrollIntoView({ behavior: "smooth" });
+        function scrollToSection(sectionId) {
+            document.querySelector(sectionId).scrollIntoView({ behavior: "smooth" });
         }
 
         renderProducts();
