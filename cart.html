@@ -114,14 +114,15 @@
         <!-- Checkout Form -->
         <form id="checkout-form">
             <h2>Checkout</h2>
-            <input type="text" id="user-name" placeholder="Your Name" required>
-            <input type="email" id="user-email" placeholder="Your Email" required>
-            <input type="tel" id="user-phone" placeholder="Your Phone Number" required>
-            <button type="button" onclick="checkout()">Place Order</button>
+            <input type="text" name="from_name" id="user-name" placeholder="Your Name" required>
+            <input type="email" name="user_email" id="user-email" placeholder="Your Email" required>
+            <input type="tel" name="phone" id="user-phone" placeholder="Your Phone Number" required>
+            <input type="hidden" name="cart_items" id="cart-items-input">
+            <button type="submit" id="checkout-button">Place Order</button>
         </form>
     </div>
 
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
         // Initialize EmailJS
         emailjs.init('6TnvROhWhdqwmbcjC');
@@ -150,6 +151,7 @@
             });
 
             cartTotal.textContent = total;
+            document.getElementById("cart-items-input").value = JSON.stringify(cart, null, 2); // Attach cart items to form
         }
 
         // Remove Item from Cart
@@ -160,32 +162,33 @@
         }
 
         // Checkout and send email using EmailJS
-        function checkout() {
-            const name = document.getElementById("user-name").value;
-            const email = document.getElementById("user-email").value;
-            const phone = document.getElementById("user-phone").value;
+        const checkoutForm = document.getElementById("checkout-form");
+        const checkoutButton = document.getElementById("checkout-button");
 
-            if (name && email && phone) {
-                emailjs.send("service_qo8786l", "template_5xi86lc", {
-                    from_name: name,
-                    user_email: email,
-                    phone: phone,
-                    cart_items: JSON.stringify(cart, null, 2),
-                })
-                .then(response => {
-                    alert("Order placed successfully! An email has been sent to you.");
-                    localStorage.clear(); // Clear cart after order
-                    cart = [];
-                    renderCart(); // Re-render cart
-                })
-                .catch(error => {
-                    console.error("Error sending email:", error);
-                    alert("Failed to send order summary. Please try again.");
-                });
-            } else {
-                alert("Please fill out all fields.");
-            }
-        }
+        checkoutForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            checkoutButton.textContent = "Sending...";
+
+            const userEmail = document.getElementById("user-email").value;
+
+            emailjs.send("service_qo8786l", "template_5xi86lc", {
+                from_name: document.getElementById("user-name").value,
+                user_email: userEmail,
+                phone: document.getElementById("user-phone").value,
+                cart_items: JSON.stringify(cart, null, 2),
+                reply_to: userEmail
+            })
+            .then(() => {
+                alert("Order placed successfully! A confirmation email has been sent to you.");
+                localStorage.clear(); // Clear cart after order
+                cart = [];
+                renderCart(); // Re-render cart
+            })
+            .catch(error => {
+                console.error("Error sending email:", error);
+                alert("Failed to send order summary. Please try again.");
+            });
+        });
 
         // Render cart on page load
         renderCart();
