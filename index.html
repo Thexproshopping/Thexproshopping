@@ -3,304 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My E-Commerce Store</title>
+    <title>TheXproShopping - E-Commerce</title>
     <style>
-        /* General Body Styles */
+        /* General Styling */
         body {
-            font-family: "Arial", sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #f8f9fa;
             color: #333;
         }
 
-        h1, h2, h3 {
-            font-weight: 600;
+        h1, h2, h3, p {
+            margin: 0.5rem 0;
         }
 
-        /* Header Section */
-        .store-header {
-            background-color: #35424a;
+        /* Header */
+        .header {
+            background: #007bff;
             color: white;
-            text-align: center;
-            padding: 80px 20px;
-        }
-
-        .store-header h1 {
-            font-size: 3.5em;
-            margin: 0;
-        }
-
-        .store-header p {
-            font-size: 1.3em;
-            margin-top: 10px;
-        }
-
-        /* Navbar */
-        .navbar {
-            background-color: #333;
-            padding: 15px;
-            color: white;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .logo {
-            font-size: 1.8em;
-            font-weight: bold;
-        }
-
-        .menu {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
-
-        .menu li {
-            display: inline;
-        }
-
-        .menu li a {
-            color: white;
+        .header .navbar a {
+            margin: 0 1rem;
             text-decoration: none;
-            font-size: 1.1em;
-        }
-
-        .menu li a:hover {
-            text-decoration: underline;
-        }
-
-        .cart-count {
-            background-color: #e74c3c;
             color: white;
-            padding: 5px 10px;
-            border-radius: 50%;
         }
 
-        /* Product Grid */
-        .product-grid {
-            padding: 40px 20px;
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 2rem;
+            background: #007bff;
+            color: white;
+        }
+
+        .hero button {
+            background-color: #fff;
+            color: #007bff;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: background 0.3s;
+        }
+
+        .hero button:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+
+        /* Search & Filter Section */
+        .search-filter {
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: space-between;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f0f0f0;
+        }
+
+        .search-filter input, .search-filter select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        /* Products Section */
+        .product-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            padding: 2rem;
         }
 
         .product-card {
-            background: white;
-            border: 1px solid #e1e1e1;
-            padding: 20px;
-            border-radius: 8px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 1rem;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            flex: 1 0 30%;
-            min-width: 250px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
         }
 
         .product-card img {
-            width: 100%;
+            max-width: 100%;
             height: auto;
             border-radius: 8px;
-            object-fit: cover;
-        }
-
-        .product-card h3 {
-            margin-top: 15px;
-            font-size: 1.5em;
-        }
-
-        .product-card p {
-            font-size: 1.1em;
-            color: #555;
         }
 
         .product-card button {
-            background-color: #35424a;
+            background: #007bff;
             color: white;
-            padding: 10px 20px;
             border: none;
-            border-radius: 5px;
-            font-size: 1em;
+            padding: 0.8rem 1.5rem;
+            border-radius: 20px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            margin-top: 1rem;
+            transition: background 0.3s;
         }
 
         .product-card button:hover {
-            background-color: #2a3940;
+            background: #0056b3;
         }
 
         /* Cart Section */
         .cart-section {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
         }
 
-        .cart-section h2 {
-            margin-bottom: 20px;
+        .cart-items {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
         }
 
         .cart-item {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            margin-bottom: 15px;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
         }
 
-        .cart-item button {
-            background-color: #e74c3c;
+        .cart-item img {
+            max-width: 60px;
+            height: auto;
+            margin-right: 1rem;
+        }
+
+        .checkout-form input {
+            width: 100%;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .checkout-form button {
+            width: 100%;
+            padding: 1rem;
+            background: #007bff;
             color: white;
             border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
+            transition: background 0.3s;
         }
 
-        .cart-item button:hover {
-            background-color: #c0392b;
-        }
-
-        .cart-total {
-            font-size: 1.2em;
-            font-weight: 600;
-            margin-top: 20px;
-            text-align: right;
-        }
-
-        .checkout-btn {
-            background-color: #2ecc71;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.2em;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        .checkout-btn:hover {
-            background-color: #27ae60;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            text-align: center;
+        .checkout-form button:hover {
+            background: #0056b3;
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">TheXproShopping</h1>
+            <nav class="navbar">
+                <a href="#products">Products</a>
+                <a href="#cart-section">Cart</a>
+                <a href="#about">About</a>
+            </nav>
+        </div>
+    </header>
 
-    <!-- Navbar -->
-    <div class="navbar">
-        <div class="logo">MyStore</div>
-        <ul class="menu">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Shop</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="cart.html"><span class="cart-count" id="cartCount">0</span> Cart</a></li>
-        </ul>
-    </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Welcome to TheXproShopping</h2>
+            <p>Your one-stop shop for amazing products at unbeatable prices!</p>
+            <button onclick="scrollToSection('#products')">Shop Now</button>
+        </div>
+    </section>
 
-    <!-- Store Header -->
-    <div class="store-header">
-        <header>
-            <h1>Welcome to Our Store</h1>
-            <p>Explore a wide selection of high-quality products at unbeatable prices.</p>
-        </header>
-    </div>
+    <!-- Search & Filter Section -->
+    <section class="search-filter">
+        <input type="text" id="search-bar" placeholder="Search Products..." onkeyup="searchProducts()">
+        <select id="filter-price" onchange="filterProductsByPrice()">
+            <option value="all">All Products</option>
+            <option value="under-500">Under ₹500</option>
+            <option value="500-1000">₹500 - ₹1000</option>
+            <option value="1000-2000">₹1000 - ₹2000</option>
+            <option value="above-2000">Above ₹2000</option>
+        </select>
+    </section>
 
-    <!-- Product Grid -->
-    <div class="product-grid" id="productGrid">
-        <!-- Product Cards will be dynamically inserted here -->
-    </div>
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <h2>Our Products</h2>
+        <div class="product-container" id="product-container">
+            <!-- Products will be rendered here -->
+        </div>
+    </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 MyStore. All rights reserved.</p>
-    </footer>
+    <!-- Cart Section -->
+    <section id="cart-section" class="cart-section">
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <h3>Total: ₹<span id="cart-total">0</span></h3>
+        <div class="checkout-form">
+            <h3>Checkout</h3>
+            <input type="text" id="user-name" placeholder="Your Name" required>
+            <input type="email" id="user-email" placeholder="Your Email" required>
+            <input type="tel" id="user-phone" placeholder="Your Phone Number" required>
+            <button type="button" onclick="checkout()">Place Order</button>
+        </div>
+    </section>
 
     <script>
-        // Product data (Example)
         const products = [
-            { id: 1, name: 'Product 1', price: 10.00, image: 'https://via.placeholder.com/300x200' },
-            { id: 2, name: 'Product 2', price: 12.00, image: 'https://via.placeholder.com/300x200' },
-            { id: 3, name: 'Product 3', price: 15.00, image: 'https://via.placeholder.com/300x200' },
-            { id: 4, name: 'Product 4', price: 18.00, image: 'https://via.placeholder.com/300x200' },
-            { id: 5, name: 'Product 5', price: 20.00, image: 'https://via.placeholder.com/300x200' },
-            { id: 6, name: 'Product 6', price: 25.00, image: 'https://via.placeholder.com/300x200' }
+            { id: 1, name: 'Smart Watch', price: 2999, image: 'https://via.placeholder.com/250', category: 'above-2000' },
+            { id: 2, name: 'Wireless Earbuds', price: 799, image: 'https://via.placeholder.com/250', category: '500-1000' },
+            { id: 3, name: 'Gaming Headset', price: 1500, image: 'https://via.placeholder.com/250', category: '1000-2000' },
+            { id: 4, name: 'Smartphone', price: 12000, image: 'https://via.placeholder.com/250', category: 'above-2000' }
         ];
-
-        // Cart data
-        let cart = [];
-
-        // Function to render products dynamically
-        function renderProducts() {
-            const productGrid = document.getElementById('productGrid');
-            products.forEach(product => {
-                const productCard = `
-                    <div class="product-card">
-                        <img src="${product.image}" alt="${product.name}">
-                        <h3>${product.name}</h3>
-                        <p>$${product.price}</p>
-                        <button onclick="addToCart(${product.id})">Add to Cart</button>
-                    </div>
-                `;
-                productGrid.innerHTML += productCard;
-            });
-        }
-
-        // Function to handle adding items to cart
-        function addToCart(productId) {
-            const product = products.find(item => item.id === productId);
-            if (product) {
-                cart.push(product);
-                updateCartCount();
-            }
-        }
-
-        // Function to update cart count
-        function updateCartCount() {
-            const cartCount = document.getElementById('cartCount');
-            cartCount.innerText = cart.length;
-        }
-
-        // Initial render of products
-        renderProducts();
-
-        // Function to render cart on cart page
-        function renderCart() {
-            const cartSection = document.querySelector('.cart-section');
-            const cartItems = cart.map(item => `
-                <div class="cart-item">
-                    <span>${item.name} - $${item.price}</span>
-                    <button onclick="removeFromCart(${item.id})">Remove</button>
-                </div>
-            `).join('');
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            cartSection.innerHTML = `
-                <h2>Your Cart</h2>
-                ${cartItems}
-                <div class="cart-total">Total: $${total.toFixed(2)}</div>
-                <button class="checkout-btn">Proceed to Checkout</button>
-            `;
-        }
-
-        // Function to handle removing items from cart
-        function removeFromCart(productId) {
-            cart = cart.filter(item => item.id !== productId);
-            updateCartCount();
-            renderCart();
-        }
-
-        // Render cart page if on cart.html
-        if (window.location.pathname.includes('cart.html')) {
-            renderCart();
-        }
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        function renderProducts(products) { /* Render Products */ }
+        function addToCart(name, price, image) { /* Add to Cart */ }
+        function renderCart() { /* Render Cart */ }
+        function removeItem(index) { /* Remove from Cart */ }
+        function checkout() { /* Checkout */ }
+        renderProducts(products);
     </script>
 </body>
 </html>
