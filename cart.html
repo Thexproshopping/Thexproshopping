@@ -3,36 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Cart - TheXproShopping</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Cart - TheXproShopping</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            max-width: 1200px;
+        }
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        .cart-section {
+            margin: 20px 0;
+        }
+        .cart-items {
+            margin-bottom: 20px;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+        }
+        .cart-item button {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .cart-summary {
+            text-align: right;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        #checkout-form {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        #checkout-form input {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        #checkout-form button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+        }
+        #checkout-form button:hover {
+            background: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
-        <div class="container">
-            <h1 class="logo">TheXproShopping</h1>
-            <nav class="navbar">
-                <a href="index.html">Home</a>
-            </nav>
-        </div>
+        <h1>TheXproShopping - Your Cart</h1>
     </header>
 
-    <!-- Cart Section -->
-    <section class="cart">
-        <h2>Your Cart</h2>
-        <div id="cart-items"></div>
-        <h3>Total: ₹<span id="cart-total">0</span></h3>
+    <div class="container">
+        <!-- Cart Section -->
+        <section class="cart-section">
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items will be rendered here -->
+            </div>
+            <div class="cart-summary">
+                <strong>Total: ₹<span id="cart-total">0</span></strong>
+            </div>
+        </section>
 
         <!-- Checkout Form -->
         <form id="checkout-form">
-            <h3>Checkout</h3>
+            <h2>Checkout</h2>
             <input type="text" id="user-name" placeholder="Your Name" required>
             <input type="email" id="user-email" placeholder="Your Email" required>
             <input type="tel" id="user-phone" placeholder="Your Phone Number" required>
             <button type="button" onclick="checkout()">Place Order</button>
         </form>
-    </section>
+    </div>
 
-    <script src="script.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS
+        emailjs.init('6TnvROhWhdqwmbcjC');
+
+        // Retrieve cart from localStorage
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        // Render Cart Items
+        function renderCart() {
+            const cartItems = document.getElementById("cart-items");
+            const cartTotal = document.getElementById("cart-total");
+            cartItems.innerHTML = "";
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                const div = document.createElement("div");
+                div.classList.add("cart-item");
+                div.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <p>${item.name}</p>
+                    <span>₹${item.price}</span>
+                    <button onclick="removeItem(${index})">Remove</button>
+                `;
+                cartItems.appendChild(div);
+                total += item.price;
+            });
+
+            cartTotal.textContent = total;
+        }
+
+        // Remove Item from Cart
+        function removeItem(index) {
+            cart.splice(index, 1); // Remove item
+            localStorage.setItem("cart", JSON.stringify(cart)); // Update localStorage
+            renderCart(); // Re-render cart
+        }
+
+        // Checkout and send email using EmailJS
+        function checkout() {
+            const name = document.getElementById("user-name").value;
+            const email = document.getElementById("user-email").value;
+            const phone = document.getElementById("user-phone").value;
+
+            if (name && email && phone) {
+                emailjs.send("service_qo8786l", "template_7w2etns", {
+                    from_name: name,
+                    user_email: email,
+                    user_phone: phone,
+                    order_summary: JSON.stringify(cart),
+                })
+                .then(response => {
+                    alert("Order placed successfully! An email has been sent to you.");
+                    localStorage.clear(); // Clear cart after order
+                    cart = [];
+                    renderCart(); // Re-render cart
+                })
+                .catch(error => {
+                    console.error("Error sending email:", error);
+                    alert("Failed to send order summary. Please try again.");
+                });
+            } else {
+                alert("Please fill out all fields.");
+            }
+        }
+
+        // Render cart on page load
+        renderCart();
+    </script>
 </body>
 </html>
