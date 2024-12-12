@@ -1,178 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart - TheXproShopping</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-        }
-        .header {
-            background-color: #007bff;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .header a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.2em;
-        }
-        .cart-section {
-            margin: 20px;
-        }
-        .cart-items {
-            margin-bottom: 20px;
-        }
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: white;
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .cart-item button {
-            background: #e74c3c;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-        .cart-summary {
-            text-align: right;
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-        }
-        #checkout-form {
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        #checkout-form input {
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        #checkout-form button {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            width: 100%;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart</title>
+  <link rel="stylesheet" href="styles/styles.css">
+  <link rel="stylesheet" href="styles/responsive.css">
 </head>
 <body>
-    <header class="header">
-        <h1>TheXproShopping</h1>
-        <div>
-            <a href="index.html">Home</a>
-            <a href="cart.html">Cart</a>
-        </div>
-    </header>
-
-    <div class="cart-section">
-        <h2>Your Cart</h2>
-
-        <div class="cart-items" id="cart-items">
-            <!-- Cart items will be inserted dynamically here -->
-        </div>
-
-        <div class="cart-summary">
-            <p>Total: ₹<span id="total-cost">0</span></p>
-            <button id="place-order-btn">Place Order</button>
-        </div>
-
-        <div id="checkout-form">
-            <h3>Checkout</h3>
-            <input type="text" id="name" placeholder="Your Name" aria-label="Your Name">
-            <input type="email" id="email" placeholder="Your Email" aria-label="Your Email">
-            <input type="text" id="address" placeholder="Your Address" aria-label="Your Address">
-            <button onclick="submitOrder()">Submit Order</button>
-        </div>
+  <header>
+    <nav>
+      <div class="logo">eCommerce</div>
+      <a href="index.html">Back to Shop</a>
+    </nav>
+  </header>
+  
+  <main>
+    <h1>Your Cart</h1>
+    <div id="cart-items"></div>
+    <div id="cart-summary">
+      <p id="subtotal"></p>
+      <button id="checkoutBtn">Checkout</button>
     </div>
+  </main>
 
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script>
-        emailjs.init("your-emailjs-user-id");
-
-        function renderCart() {
-            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-            const cartItemsContainer = document.getElementById('cart-items');
-            const totalCostElement = document.getElementById('total-cost');
-            cartItemsContainer.innerHTML = '';
-
-            let totalCost = 0;
-
-            cartItems.forEach((item, index) => {
-                const itemDiv = document.createElement('div');
-                itemDiv.classList.add('cart-item');
-                itemDiv.innerHTML = `
-                    <div>
-                        <h4>${item.name}</h4>
-                        <p>₹${item.price}</p>
-                    </div>
-                    <button onclick="removeFromCart(${index})">Remove</button>
-                `;
-                cartItemsContainer.appendChild(itemDiv);
-                totalCost += item.price;
-            });
-
-            totalCostElement.textContent = totalCost;
-        }
-
-        function removeFromCart(index) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            cart.splice(index, 1);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            renderCart();
-        }
-
-        function submitOrder() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const totalCost = cart.reduce((sum, item) => sum + item.price, 0);
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const address = document.getElementById('address').value;
-
-            const templateParams = {
-                name,
-                email,
-                address,
-                totalCost,
-                items: cart.map(item => `${item.name} - ₹${item.price}`).join(", "),
-            };
-
-            emailjs.send('your_emailjs_service_id', 'order_confirmation', templateParams)
-                .then(response => {
-                    alert('Order placed successfully!');
-                    localStorage.removeItem('cart');
-                    renderCart();
-                })
-                .catch(error => {
-                    console.error('Error sending email:', error);
-                });
-        }
-
-        // Initial render
-        renderCart();
-    </script>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script src="scripts/cart.js"></script>
 </body>
 </html>
