@@ -5,44 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart - TheXproShopping</title>
     <style>
-        /* General Styling */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f8f9fa;
-            color: #333;
         }
-
-        .container {
-            width: 90%;
-            margin: auto;
-            max-width: 1200px;
-        }
-
-        header {
+        .header {
             background-color: #007bff;
             color: white;
             padding: 15px;
+            text-align: center;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
-        header a {
+        .header a {
             color: white;
             text-decoration: none;
             font-size: 1.2em;
         }
-
         .cart-section {
-            margin: 20px 0;
+            margin: 20px;
         }
-
         .cart-items {
             margin-bottom: 20px;
         }
-
         .cart-item {
             display: flex;
             justify-content: space-between;
@@ -53,13 +41,6 @@
             border: 1px solid #ddd;
             border-radius: 5px;
         }
-
-        .cart-item img {
-            width: 50px;
-            height: 50px;
-            border-radius: 5px;
-        }
-
         .cart-item button {
             background: #e74c3c;
             color: white;
@@ -68,20 +49,17 @@
             border-radius: 3px;
             cursor: pointer;
         }
-
         .cart-summary {
             text-align: right;
             font-size: 1.2rem;
             margin-bottom: 20px;
         }
-
         #checkout-form {
             background: white;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
         #checkout-form input {
             width: 100%;
             margin-bottom: 10px;
@@ -89,7 +67,6 @@
             border: 1px solid #ddd;
             border-radius: 5px;
         }
-
         #checkout-form button {
             background: #007bff;
             color: white;
@@ -100,122 +77,101 @@
             font-size: 1rem;
             width: 100%;
         }
-
-        #checkout-form button:hover {
-            background: #0056b3;
-        }
-
-        @media (max-width: 768px) {
-            .cart-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .cart-item img {
-                margin-bottom: 10px;
-            }
-        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>TheXproShopping - Your Cart</h1>
-        <a href="index.html" aria-label="Go back to the homepage">Home</a>
+    <header class="header">
+        <h1>TheXproShopping</h1>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="cart.html">Cart</a>
+        </div>
     </header>
 
-    <div class="container">
-        <!-- Cart Section -->
-        <section class="cart-section" aria-labelledby="cart-section-heading">
-            <h2 id="cart-section-heading" class="visually-hidden">Your Cart</h2>
-            <div class="cart-items" id="cart-items">
-                <!-- Cart items will be rendered here -->
-            </div>
-            <div class="cart-summary" aria-live="polite">
-                <strong>Total: ₹<span id="cart-total">0</span></strong>
-            </div>
-        </section>
+    <div class="cart-section">
+        <h2>Your Cart</h2>
 
-        <!-- Checkout Form -->
-        <form id="checkout-form" aria-labelledby="checkout-form-heading">
-            <h2 id="checkout-form-heading">Checkout</h2>
-            <input type="text" name="from_name" id="user-name" placeholder="Your Name" aria-label="Your Name" required>
-            <input type="email" name="user_email" id="user-email" placeholder="Your Email" aria-label="Your Email" required>
-            <input type="tel" name="phone" id="user-phone" placeholder="Your Phone Number" aria-label="Your Phone Number" required>
-            <input type="hidden" name="cart_items" id="cart-items-input">
-            <button type="submit" id="checkout-button" aria-label="Place Order">Place Order</button>
-        </form>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be inserted dynamically here -->
+        </div>
+
+        <div class="cart-summary">
+            <p>Total: ₹<span id="total-cost">0</span></p>
+            <button id="place-order-btn">Place Order</button>
+        </div>
+
+        <div id="checkout-form">
+            <h3>Checkout</h3>
+            <input type="text" id="name" placeholder="Your Name" aria-label="Your Name">
+            <input type="email" id="email" placeholder="Your Email" aria-label="Your Email">
+            <input type="text" id="address" placeholder="Your Address" aria-label="Your Address">
+            <button onclick="submitOrder()">Submit Order</button>
+        </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
-        // Initialize EmailJS
-        emailjs.init('6TnvROhWhdqwmbcjC');
+        emailjs.init("your-emailjs-user-id");
 
-        // Retrieve cart from localStorage
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-        // Render Cart Items
         function renderCart() {
-            const cartItems = document.getElementById("cart-items");
-            const cartTotal = document.getElementById("cart-total");
-            cartItems.innerHTML = "";
-            let total = 0;
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItemsContainer = document.getElementById('cart-items');
+            const totalCostElement = document.getElementById('total-cost');
+            cartItemsContainer.innerHTML = '';
 
-            cart.forEach((item, index) => {
-                const div = document.createElement("div");
-                div.classList.add("cart-item");
-                div.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}" aria-label="${item.name}">
-                    <p>${item.name}</p>
-                    <span>₹${item.price}</span>
-                    <button aria-label="Remove ${item.name}" onclick="removeItem(${index})">Remove</button>
+            let totalCost = 0;
+
+            cartItems.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('cart-item');
+                itemDiv.innerHTML = `
+                    <div>
+                        <h4>${item.name}</h4>
+                        <p>₹${item.price}</p>
+                    </div>
+                    <button onclick="removeFromCart(${index})">Remove</button>
                 `;
-                cartItems.appendChild(div);
-                total += item.price;
+                cartItemsContainer.appendChild(itemDiv);
+                totalCost += item.price;
             });
 
-            cartTotal.textContent = total;
-            document.getElementById("cart-items-input").value = JSON.stringify(cart, null, 2);
+            totalCostElement.textContent = totalCost;
         }
 
-        // Remove Item from Cart
-        function removeItem(index) {
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
             cart.splice(index, 1);
-            localStorage.setItem("cart", JSON.stringify(cart));
+            localStorage.setItem('cart', JSON.stringify(cart));
             renderCart();
         }
 
-        // Checkout Form Submission
-        const checkoutForm = document.getElementById("checkout-form");
-        const checkoutButton = document.getElementById("checkout-button");
+        function submitOrder() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalCost = cart.reduce((sum, item) => sum + item.price, 0);
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
 
-        checkoutForm.addEventListener("submit", function(event) {
-            event.preventDefault();
-            checkoutButton.textContent = "Sending...";
+            const templateParams = {
+                name,
+                email,
+                address,
+                totalCost,
+                items: cart.map(item => `${item.name} - ₹${item.price}`).join(", "),
+            };
 
-            const userEmail = document.getElementById("user-email").value;
+            emailjs.send('your_emailjs_service_id', 'order_confirmation', templateParams)
+                .then(response => {
+                    alert('Order placed successfully!');
+                    localStorage.removeItem('cart');
+                    renderCart();
+                })
+                .catch(error => {
+                    console.error('Error sending email:', error);
+                });
+        }
 
-            emailjs.send("service_qo8786l", "template_sjj5eza", {
-                from_name: document.getElementById("user-name").value,
-                user_email: userEmail,
-                phone: document.getElementById("user-phone").value,
-                cart_items: JSON.stringify(cart, null, 2),
-            })
-            .then(() => {
-                alert("Order placed successfully! A confirmation email has been sent to you.");
-                localStorage.clear();
-                cart = [];
-                renderCart();
-                checkoutButton.textContent = "Place Order";
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("Failed to send order summary. Please try again.");
-                checkoutButton.textContent = "Place Order";
-            });
-        });
-
-        // Render cart on page load
+        // Initial render
         renderCart();
     </script>
 </body>
