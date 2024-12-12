@@ -1,14 +1,78 @@
 [
   {
     "id": 1,
-    "name": "Product 1",
-    "price": 20.99,
-    "img": "images/product1.jpg"
+    "name": "Wireless Headphones",
+    "category": "electronics",
+    "price": 29.99,
+    "image": "images/product1.jpg",
+    "stock": 50,
+    "description": "High-quality wireless headphones with noise-cancellation and long battery life.",
+    "rating": 4.5,
+    "colors": ["black", "white"],
+    "alt": "Wireless Headphones - Black and White"
   },
   {
     "id": 2,
-    "name": "Product 2",
-    "price": 45.99,
-    "img": "images/product2.jpg"
+    "name": "Smartphone",
+    "category": "electronics",
+    "price": 699.99,
+    "image": "images/product2.jpg",
+    "stock": 30,
+    "description": "Latest model smartphone with high-speed performance and stunning display.",
+    "rating": 4.7,
+    "colors": ["black", "silver", "blue"],
+    "alt": "Smartphone in black, silver, and blue colors"
+  },
+  {
+    "id": 3,
+    "name": "Men's T-Shirt",
+    "category": "clothing",
+    "price": 19.99,
+    "image": "images/product3.jpg",
+    "stock": 100,
+    "description": "Comfortable cotton t-shirt available in various sizes and colors.",
+    "rating": 4.3,
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": ["red", "blue", "green", "black"],
+    "alt": "Men's cotton t-shirt in multiple colors"
+  },
+  {
+    "id": 4,
+    "name": "Women's Jacket",
+    "category": "clothing",
+    "price": 49.99,
+    "image": "images/product4.jpg",
+    "stock": 20,
+    "description": "Stylish winter jacket for women with comfortable lining and a modern fit.",
+    "rating": 4.6,
+    "sizes": ["S", "M", "L"],
+    "colors": ["black", "gray", "navy"],
+    "alt": "Women's stylish winter jacket in black, gray, and navy"
+  },
+  {
+    "id": 5,
+    "name": "JavaScript Book",
+    "category": "books",
+    "price": 29.99,
+    "image": "images/product5.jpg",
+    "stock": 15,
+    "description": "Comprehensive guide to JavaScript, from basics to advanced concepts.",
+    "rating": 4.8,
+    "language": "English",
+    "pages": 500,
+    "alt": "JavaScript book with detailed explanations"
+  },
+  {
+    "id": 6,
+    "name": "CSS Mastery",
+    "category": "books",
+    "price": 24.99,
+    "image": "images/product6.jpg",
+    "stock": 25,
+    "description": "Master CSS with this in-depth book covering all modern techniques and tips.",
+    "rating": 4.7,
+    "language": "English",
+    "pages": 450,
+    "alt": "CSS Mastery book with modern design techniques"
   }
 ]
