@@ -1,4 +1,4 @@
-// Manage order processing
+// Handle order processing and sending email using EmailJS
 function processOrder(cartItems, userName, userEmail) {
   const orderData = {
     customerName: userName,
@@ -11,12 +11,7 @@ function processOrder(cartItems, userName, userEmail) {
     total: cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
   };
 
-  // Save order to orders.json (for demonstration in a static site)
-  const orders = JSON.parse(localStorage.getItem('orders')) || [];
-  orders.push(orderData);
-  localStorage.setItem('orders', JSON.stringify(orders));
-
-  // Send order details via EmailJS
+  // Send email with order details
   const emailData = {
     to_name: userName,
     to_email: userEmail,
@@ -24,7 +19,7 @@ function processOrder(cartItems, userName, userEmail) {
     subtotal: orderData.total.toFixed(2)
   };
 
-  emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', emailData, 'YOUR_USER_ID')
+  emailjs.send('service_qo8786l', 'template_93mcb61', emailData, '6TnvROhWhdqwmbcjC')
     .then(function(response) {
       console.log("Success:", response);
       window.location.href = "thankyou.html";
