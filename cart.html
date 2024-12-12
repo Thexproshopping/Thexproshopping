@@ -3,256 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Cart - TheXPro Shopping</title>
+  <title>Cart - TheXPro Shopping</title>
   <link rel="stylesheet" href="styles/styles.css">
-  <link rel="stylesheet" href="styles/responsive.css">
-  <link rel="stylesheet" href="styles/animations.css">
-  <style>
-    /* Additional styling for the cart page */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-    }
-    .header {
-      background-color: #333;
-      color: #fff;
-      padding: 10px 0;
-    }
-    .header .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: auto;
-      padding: 0 20px;
-    }
-    .navbar ul {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-    }
-    .navbar ul li a {
-      color: #fff;
-      text-decoration: none;
-    }
-    .cart-container {
-      max-width: 1200px;
-      margin: 20px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    .cart-items {
-      margin-bottom: 20px;
-    }
-    .cart-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid #ddd;
-    }
-    .cart-item img {
-      width: 80px;
-      border-radius: 4px;
-    }
-    .cart-item-details {
-      flex: 1;
-      padding-left: 10px;
-    }
-    .quantity-controls button {
-      background: #333;
-      color: white;
-      padding: 5px 10px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .quantity-controls button:hover {
-      background: #555;
-    }
-    .remove-btn {
-      background: #e74c3c;
-      color: white;
-      padding: 5px 10px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .remove-btn:hover {
-      background: #c0392b;
-    }
-    .cart-summary {
-      margin-top: 20px;
-    }
-    .cart-summary p {
-      font-size: 1.1rem;
-      margin: 5px 0;
-    }
-    .cta-button {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      text-align: center;
-      background: #333;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: 0.3s;
-    }
-    .cta-button:hover {
-      background: #555;
-    }
-    .empty-cart-message {
-      text-align: center;
-      font-size: 1.2rem;
-      color: #666;
-      margin-top: 20px;
-    }
-  </style>
 </head>
 <body>
   <header class="header">
     <div class="container">
-      <div class="logo">TheXPro 🛒</div>
+      <div class="logo">TheXProShopping</div>
       <nav class="navbar">
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="cart.html">Cart</a></li>
+          <li><a href="cart.html">Cart 🛒</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <section class="cart">
-    <div class="cart-container">
+  <main>
+    <section class="cart">
       <h1>Your Cart</h1>
-      <div class="cart-items" id="cart-items">
-        <!-- Dynamic cart items will be inserted here -->
+      <div id="cart-items" class="cart-items">
+        <!-- Cart items will load dynamically -->
       </div>
       <div class="cart-summary">
-        <div class="total">
-          <p>Subtotal: <span id="subtotal">$0.00</span></p>
-          <p>Discount: <span id="discount">$0.00</span></p>
-          <p>Total: <span id="total">$0.00</span></p>
-        </div>
+        <p>Subtotal: $<span id="subtotal">0.00</span></p>
         <input type="text" id="discount-code" placeholder="Enter discount code">
-        <button id="apply-discount" class="cta-button">Apply Discount</button>
-        <button id="checkout-btn" class="cta-button">Place Order</button>
+        <button id="apply-discount" class="btn">Apply Discount</button>
+        <p>Total: $<span id="total">0.00</span></p>
+        <button id="checkout-btn" class="btn">Place Order</button>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <footer>
-    <div class="footer-container">
-      <p>&copy; 2024 TheXPro Shopping. All rights reserved.</p>
-    </div>
+    <p>&copy; 2024 TheXProShopping. All rights reserved.</p>
   </footer>
 
   <script src="scripts/cart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script>
-    // Initialize EmailJS
-    emailjs.init('6TnvROhWhdqwmbcjC');
-
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const cartItemsContainer = document.getElementById("cart-items");
-    const subtotalElement = document.getElementById("subtotal");
-    const totalElement = document.getElementById("total");
-    const discountElement = document.getElementById("discount");
-
-    function renderCart() {
-      cartItemsContainer.innerHTML = "";
-      if (cart.length === 0) {
-        cartItemsContainer.innerHTML = '<p class="empty-cart-message">Your cart is empty.</p>';
-        return;
-      }
-
-      let subtotal = 0;
-
-      cart.forEach((item, index) => {
-        const itemTotal = item.price * item.quantity;
-        subtotal += itemTotal;
-
-        cartItemsContainer.innerHTML += `
-          <div class="cart-item">
-            <img src="${item.image}" alt="${item.name}">
-            <div class="cart-item-details">
-              <h3>${item.name}</h3>
-              <p>Price: $${item.price.toFixed(2)}</p>
-              <div class="quantity-controls">
-                <button onclick="decreaseQuantity(${index})">-</button>
-                <span>${item.quantity}</span>
-                <button onclick="increaseQuantity(${index})">+</button>
-              </div>
-            </div>
-            <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
-          </div>
-        `;
-      });
-
-      subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
-      totalElement.textContent = `$${subtotal.toFixed(2)}`;
-    }
-
-    function decreaseQuantity(index) {
-      if (cart[index].quantity > 1) {
-        cart[index].quantity--;
-        saveCart();
-      }
-    }
-
-    function increaseQuantity(index) {
-      cart[index].quantity++;
-      saveCart();
-    }
-
-    function removeItem(index) {
-      cart.splice(index, 1);
-      saveCart();
-    }
-
-    function saveCart() {
-      localStorage.setItem("cart", JSON.stringify(cart));
-      renderCart();
-    }
-
-    document.getElementById("apply-discount").addEventListener("click", () => {
-      const discountCode = document.getElementById("discount-code").value.trim().toUpperCase();
-      let discount = 0;
-
-      if (discountCode === "SAVE10") {
-        discount = parseFloat(subtotalElement.textContent.slice(1)) * 0.1;
-      }
-
-      discountElement.textContent = `-$${discount.toFixed(2)}`;
-      totalElement.textContent = `$${(parseFloat(subtotalElement.textContent.slice(1)) - discount).toFixed(2)}`;
-    });
-
-    document.getElementById("checkout-btn").addEventListener("click", () => {
-      const orderDetails = cart.map(item => `${item.name} x ${item.quantity}`).join(", ");
-      const totalAmount = totalElement.textContent;
-
-      emailjs.send("service_qo8786l", "template_4fnd3qf", {
-        order_details: orderDetails,
-        total_amount: totalAmount,
-        user_email: "your-email@example.com",
-      }).then(() => {
-        alert("Order placed successfully!");
-        localStorage.clear();
-        window.location.href = "thankyou.html";
-      }).catch(error => {
-        alert("Failed to place order. Please try again.");
-        console.error(error);
-      });
-    });
-
-    renderCart();
-  </script>
 </body>
 </html>
