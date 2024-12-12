@@ -22,18 +22,24 @@
   </header>
 
   <section class="cart">
-    <h1>Your Cart</h1>
-    <div class="cart-items" id="cart-items">
-      <!-- Dynamic cart items -->
-    </div>
-    <div class="cart-summary">
-      <p>Total: <span id="total">$0.00</span></p>
-      <button id="checkout-btn" class="cta-button">Checkout</button>
+    <div class="cart-container">
+      <h1>Your Cart</h1>
+      <div class="cart-items" id="cart-items">
+        <!-- Dynamic cart items will be inserted here -->
+      </div>
+      <div class="cart-summary">
+        <div class="total">
+          <p>Total: <span id="total">$0.00</span></p>
+        </div>
+        <button id="checkout-btn" class="cta-button">Proceed to Checkout</button>
+      </div>
     </div>
   </section>
 
   <footer>
-    <p>&copy; 2024 TheXPro Shopping. All rights reserved.</p>
+    <div class="footer-container">
+      <p>&copy; 2024 TheXPro Shopping. All rights reserved.</p>
+    </div>
   </footer>
 
   <script src="scripts/cart.js"></script>
