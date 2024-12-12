@@ -1,27 +1,65 @@
-// Load cart items from localStorage
-const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-const cartContainer = document.getElementById('cart-items');
-const totalPriceElement = document.getElementById('total-price');
+document.addEventListener('DOMContentLoaded', () => {
+  const cartItemsContainer = document.getElementById('cart-items');
+  const subtotalElement = document.getElementById('subtotal');
+  const totalElement = document.getElementById('total');
+  const discountCodeInput = document.getElementById('discount-code');
+  const applyDiscountButton = document.getElementById('apply-discount');
+  const checkoutButton = document.getElementById('checkout-btn');
 
-// Display cart items
-cartItems.forEach(item => {
-  const itemElement = document.createElement('div');
-  itemElement.classList.add('cart-item');
-  itemElement.innerHTML = `
-    <img src="${item.img}" alt="${item.name}">
-    <div>${item.name}</div>
-    <div>$${item.price} x ${item.quantity}</div>
-  `;
-  cartContainer.appendChild(itemElement);
-});
+  let cartItems = [];
+  let subtotal = 0;
 
-// Calculate total price
-const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-totalPriceElement.textContent = totalPrice.toFixed(2);
+  function updateCart() {
+    try {
+      cartItemsContainer.innerHTML = '';
+      subtotal = 0;
 
-// Handle checkout
-document.getElementById('checkoutBtn').addEventListener('click', function() {
-  const userName = prompt('Enter your name:');
-  const userEmail = prompt('Enter your email:');
-  processOrder(cartItems, userName, userEmail);
+      cartItems.forEach(item => {
+        const itemElement = document.createElement('div');
+        itemElement.className = 'cart-item';
+        itemElement.innerHTML = `
+          <p>${item.name} - $${item.price.toFixed(2)}</p>
+          <button class="remove-item" data-id="${item.id}">Remove</button>
+        `;
+        cartItemsContainer.appendChild(itemElement);
+        subtotal += item.price;
+      });
+
+      subtotalElement.textContent = subtotal.toFixed(2);
+      totalElement.textContent = subtotal.toFixed(2);
+    } catch (error) {
+      console.error('Error updating cart:', error);
+      alert('An error occurred while updating the cart. Please try again.');
+    }
+  }
+
+  function applyDiscount() {
+    try {
+      const discountCode = discountCodeInput.value;
+      if (discountCode === 'SAVE10') {
+        const discountAmount = subtotal * 0.10;
+        subtotal -= discountAmount;
+        alert('Discount applied!');
+      } else {
+        alert('Invalid discount code.');
+      }
+      totalElement.textContent = subtotal.toFixed(2);
+    } catch (error) {
+      console.error('Error applying discount:', error);
+      alert('An error occurred while applying the discount. Please try again.');
+    }
+  }
+
+  applyDiscountButton.addEventListener('click', applyDiscount);
+  checkoutButton.addEventListener('click', () => {
+    alert('Proceeding to checkout...');
+  });
+
+  // Example items for demonstration
+  cartItems = [
+    { id: 1, name: 'Item 1', price: 29.99 },
+    { id: 2, name: 'Item 2', price: 19.99 }
+  ];
+
+  updateCart();
 });
