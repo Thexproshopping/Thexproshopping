@@ -4,9 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheXproShopping - Next-Gen E-Commerce</title>
+    <meta name="description" content="The Explore Shopping - Your one-stop e-commerce store.">
+    <meta name="author" content="The Explore Shopping">
+    <title>The Explore Shopping</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
-        /* General Styles */
+        /* Basic Reset */
         * {
             margin: 0;
             padding: 0;
@@ -14,204 +17,180 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: #f5f5f7;
+            font-family: 'Poppins', Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #eef2f5;
             color: #333;
         }
 
-        .container {
-            width: 90%;
-            margin: auto;
-            max-width: 1200px;
-        }
-
-        button {
-            cursor: pointer;
-            border: none;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
         /* Navbar */
-        .navbar {
-            background: #ffffff;
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        .navbar .logo {
-            font-size: 1.8rem;
+        nav .brand {
+            font-size: 1.5rem;
             font-weight: bold;
-            color: #4a4aff;
         }
 
-        .navbar .cart {
+        nav ul {
+            list-style: none;
             display: flex;
-            align-items: center;
-            gap: 10px;
+            gap: 1rem;
         }
 
-        .navbar .cart img {
-            width: 30px;
-            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+        nav ul li {
+            cursor: pointer;
         }
 
-        .navbar .cart-count {
-            background: linear-gradient(135deg, #4a4aff, #1f1fbf);
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
         }
 
         /* Hero Section */
         .hero {
+            background: url('hero-bg.jpg') no-repeat center/cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            padding: 70px 20px;
-            background: linear-gradient(135deg, #4a4aff, #1f1fbf);
-            color: white;
-            border-radius: 20px;
-            margin: 20px 0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            color: #fff;
+            position: relative;
         }
 
         .hero h1 {
-            font-size: 3.2rem;
-            margin-bottom: 20px;
+            font-size: 2.5rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            border-radius: 10px;
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+        .search-bar {
+            position: absolute;
+            bottom: 20px;
+            width: 80%;
+            margin: 0 auto;
         }
 
-        .hero button {
-            background: #ffffff;
-            color: #4a4aff;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-        }
-
-        .hero button:hover {
-            background: #e0e0ff;
+        .search-bar input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: none;
+            outline: none;
         }
 
         /* Products Section */
         .products {
-            padding: 40px 20px;
-            text-align: center;
+            padding: 2rem;
         }
 
         .products h2 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            color: #4a4aff;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #0066cc;
         }
 
-        .product-container {
+        .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
         }
 
-        .product-card {
-            background: #ffffff;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-            position: relative;
+        .product {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            text-align: center;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .product-card img {
+        .product img {
             width: 100%;
+            height: auto;
+            object-fit: cover;
             border-bottom: 1px solid #ddd;
+            margin-bottom: 1rem;
         }
 
-        .product-card h3 {
-            font-size: 1.2rem;
-            margin: 15px 0;
+        .product h3 {
+            font-size: 1.25rem;
         }
 
-        .product-card p {
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 20px;
+        .product .price {
+            color: #27ae60;
+            margin: 0.5rem 0;
         }
 
-        .product-card button {
-            background: #4a4aff;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            position: absolute;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            transition: all 0.3s;
+        .product button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 5px;
         }
 
-        .product-card button:hover {
-            background: #1f1fbf;
+        .product button:hover {
+            background-color: #555;
         }
 
         /* Footer */
         footer {
-            background: #4a4aff;
-            color: white;
             text-align: center;
-            padding: 20px;
-            margin-top: 30px;
-            border-radius: 10px 10px 0 0;
+            padding: 1rem;
+            background-color: #333;
+            color: #fff;
+            margin-top: 2rem;
         }
     </style>
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">TheXproShopping</div>
-        <div class="cart">
-            <img src="cart-icon.png" alt="Cart">
-            <div class="cart-count" id="cart-count">0</div>
-        </div>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="brand">The Explore Shopping</div>
+        <ul>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#cart">Cart</a></li>
+        </ul>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <h1>Welcome to TheXproShopping</h1>
-        <p>Your one-stop destination for all things awesome. Shop with ease and confidence.</p>
-        <button onclick="scrollToSection('#products')">Start Shopping</button>
+    <section class="hero" aria-label="Hero Section">
+        <h1>Welcome to The Explore Shopping</h1>
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Search for products..." oninput="searchProducts(this.value)">
+        </div>
     </section>
 
     <!-- Products Section -->
-    <section id="products" class="products">
-        <h2>Our Bestselling Products</h2>
-        <div class="product-container" id="product-container"></div>
+    <section id="products" class="products" aria-labelledby="products-heading">
+        <h2 id="products-heading">Our Products</h2>
+        <div class="product-grid">
+            <!-- Products dynamically inserted here -->
+        </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2045 TheXproShopping. All Rights Reserved.</p>
+        <p>&copy; 2024 The Explore Shopping. All rights reserved.</p>
     </footer>
 
     <script>
+        // Initialize product data
         const products = [
             { id: 1, name: "Smart Watch", price: 2999, image: "product1.jpg" },
             { id: 2, name: "Wireless Earbuds", price: 799, image: "product2.jpg" },
@@ -220,16 +199,16 @@
             { id: 5, name: "Bluetooth Speaker", price: 1200, image: "product5.jpg" }
         ];
 
-        const cart = JSON.parse(localStorage.getItem("cart")) || [];
-        const productContainer = document.getElementById("product-container");
-        const cartCount = document.getElementById("cart-count");
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-        function renderProducts() {
-            productContainer.innerHTML = products.map(product => `
-                <div class="product-card">
-                    <img src="${product.image}" alt="${product.name}">
+        function renderProducts(filter = "") {
+            const productGrid = document.querySelector('.product-grid');
+            const filteredProducts = products.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()));
+            productGrid.innerHTML = filteredProducts.map(product => `
+                <div class="product">
+                    <img src="${product.image}" alt="${product.name}" loading="lazy">
                     <h3>${product.name}</h3>
-                    <p>₹${product.price}</p>
+                    <p class="price">₹${product.price}</p>
                     <button onclick="addToCart(${product.id})">Add to Cart</button>
                 </div>
             `).join('');
@@ -239,20 +218,14 @@
             const product = products.find(p => p.id === id);
             cart.push(product);
             localStorage.setItem("cart", JSON.stringify(cart));
-            updateCartCount();
-            alert(`${product.name} added to your cart!`);
+            alert(`${product.name} added to cart!`);
         }
 
-        function updateCartCount() {
-            cartCount.textContent = cart.length;
-        }
-
-        function scrollToSection(sectionId) {
-            document.querySelector(sectionId).scrollIntoView({ behavior: "smooth" });
+        function searchProducts(query) {
+            renderProducts(query);
         }
 
         renderProducts();
-        updateCartCount();
     </script>
 </body>
 
