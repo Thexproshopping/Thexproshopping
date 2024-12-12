@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TheXPro Shopping - Premium products at unbeatable prices. Shop now!">
   <title>TheXPro Shopping - Home</title>
   <link rel="stylesheet" href="styles/styles.css">
   <link rel="stylesheet" href="styles/responsive.css">
   <link rel="stylesheet" href="styles/animations.css">
 </head>
+
 <body>
   <header class="header">
     <div class="container">
-      <div class="logo">TheXProShopping</div>
+      <!-- Logo -->
+      <div class="logo">
+        <a href="index.html">TheXProShopping</a>
+      </div>
+      
+      <!-- Navbar -->
       <nav class="navbar">
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="cart.html">Cart 🛒</a></li>
         </ul>
       </nav>
+
+      <!-- Search Bar -->
       <div class="search-bar">
         <input type="text" id="search" placeholder="Search products..." aria-label="Search products">
         <button id="search-button" aria-label="Search"><span>🔍</span></button>
@@ -25,40 +35,88 @@
     </div>
   </header>
 
+  <!-- Main Content -->
   <main>
+    <!-- Hero Section -->
     <section class="hero">
       <h1>Welcome to TheXProShopping</h1>
       <p>Shop premium products at unbeatable prices!</p>
     </section>
 
+    <!-- Products Section -->
     <section class="products">
       <h2>Our Products</h2>
       <div id="product-grid" class="product-grid">
-        <!-- Products will load dynamically -->
+        <!-- Dynamically loaded products will go here -->
       </div>
+      <div id="loading-message" style="display: none;">Loading products...</div>
+      <div id="error-message" style="display: none; color: red;">Sorry, we couldn't load the products at this time. Please try again later.</div>
     </section>
   </main>
 
+  <!-- Footer Section -->
   <footer>
     <p>&copy; 2024 TheXProShopping. All rights reserved.</p>
   </footer>
 
   <script src="scripts/main.js"></script>
   <script>
-    // Error handling for dynamic product loading
-    try {
-      // Simulate product loading
-      loadProducts();
-    } catch (error) {
-      console.error("Error loading products:", error);
-      document.getElementById('product-grid').innerHTML = "<p>Sorry, we couldn't load the products at this time. Please try again later.</p>";
-    }
+    // Simulate dynamic product loading with error handling
+    document.addEventListener("DOMContentLoaded", function () {
+      const productGrid = document.getElementById("product-grid");
+      const loadingMessage = document.getElementById("loading-message");
+      const errorMessage = document.getElementById("error-message");
 
-    function loadProducts() {
+      loadingMessage.style.display = "block"; // Show loading message
+      errorMessage.style.display = "none"; // Hide error message
+
+      try {
+        loadProducts(); // Attempt to load products
+      } catch (error) {
+        console.error("Error loading products:", error);
+        loadingMessage.style.display = "none"; // Hide loading message
+        errorMessage.style.display = "block"; // Show error message
+      }
+
       // Simulated function to load products
-      // This is where you would typically fetch data from an API
-      throw new Error("Simulated product loading error"); // Simulating an error for demonstration
-    }
+      function loadProducts() {
+        // Simulating product data (replace with actual product fetching logic)
+        const products = [
+          {
+            name: "Wireless Headphones",
+            price: "$29.99",
+            image: "images/product1.jpg",
+          },
+          {
+            name: "Smartphone",
+            price: "$699.99",
+            image: "images/product2.jpg",
+          },
+        ];
+
+        loadingMessage.style.display = "none"; // Hide loading message
+
+        // Dynamically render product cards
+        products.forEach(product => {
+          const productCard = `
+            <div class="product-card">
+              <img src="${product.image}" alt="${product.name}">
+              <h3>${product.name}</h3>
+              <p>${product.price}</p>
+              <button onclick="addToCart('${product.name}', '${product.price}')">Add to Cart 🛒</button>
+            </div>
+          `;
+          productGrid.innerHTML += productCard;
+        });
+      }
+
+      // Simulated function to handle add-to-cart actions
+      window.addToCart = function (name, price) {
+        console.log(`Product added: ${name} - ${price}`);
+        // Add your cart logic here, for example, storing in localStorage
+      };
+    });
   </script>
 </body>
+
 </html>
