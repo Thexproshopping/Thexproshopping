@@ -1,6 +1,6 @@
 /* Global styles */
 body {
-    font-family: 'Poppins', sans-serif; /* Using a modern Google Font */
+    font-family: 'Poppins', sans-serif; /* Modern Google Font */
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
@@ -70,9 +70,15 @@ footer .social-links a:hover {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Hover effect on product card */
 .product-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Applying animation from animations.css */
+.product-card {
+    animation: fadeIn 0.6s ease-in-out; /* Fade-in effect */
 }
 
 .product-card img {
@@ -104,11 +110,13 @@ footer .social-links a:hover {
     transition: background-color 0.3s ease;
 }
 
+/* Button hover effect */
 .product-card button:hover {
-    background-color: #0056b3; /* Color on hover */
+    background-color: #0056b3;
+    transition: background-color 0.3s ease;
 }
 
-/* Cart styles */
+/* Cart summary and button */
 .cart-summary {
     border-top: 2px solid #ddd;
     padding: 20px;
@@ -139,6 +147,7 @@ footer .social-links a:hover {
     transition: background-color 0.3s ease;
 }
 
+/* Hover effect on checkout button */
 .cart-summary button:hover {
     background-color: #218838; /* Color on hover */
 }
@@ -154,7 +163,7 @@ footer .social-links a:hover {
     }
 
     .product-card {
-        width: 100%; /* Make product cards full-width on smaller screens */
+        width: 100%; /* Full-width for product cards on smaller screens */
     }
 
     header {
@@ -170,43 +179,17 @@ footer .social-links a:hover {
     }
 }
 
+/* For very small screens (max-width: 480px) */
 @media (max-width: 480px) {
     .product-card h3 {
-        font-size: 1rem; /* Adjust title size on small screens */
+        font-size: 1rem;
     }
 
     .product-card p {
-        font-size: 0.9rem; /* Adjust description font size */
+        font-size: 0.9rem;
     }
 
     .cart-summary button {
         padding: 12px 25px;
     }
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.product-card {
-    animation: fadeIn 0.6s ease-in;
-}
-
-button {
-    transition: background-color 0.3s ease-in-out;
-}
-
-input[type="text"] {
-    padding: 10px;
-    font-size: 1rem;
-    width: 100%;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ddd;
 }
