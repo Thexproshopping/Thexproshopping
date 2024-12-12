@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Cart</title>
+  <title>eCommerce - Cart</title>
   <link rel="stylesheet" href="styles/styles.css">
   <link rel="stylesheet" href="styles/responsive.css">
+  <link rel="stylesheet" href="styles/animations.css">
 </head>
 <body>
   <header>
@@ -14,17 +15,18 @@
       <a href="index.html">Back to Shop</a>
     </nav>
   </header>
-  
+
   <main>
     <h1>Your Cart</h1>
-    <div id="cart-items"></div>
-    <div id="cart-summary">
-      <p id="subtotal"></p>
-      <button id="checkoutBtn">Checkout</button>
+    <div id="cart-items">
+      <!-- Cart items will be dynamically loaded from localStorage -->
     </div>
+    <div id="cart-total">
+      <strong>Total: $<span id="total-price">0.00</span></strong>
+    </div>
+    <button id="checkoutBtn">Checkout</button>
   </main>
 
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script src="scripts/cart.js"></script>
 </body>
 </html>
