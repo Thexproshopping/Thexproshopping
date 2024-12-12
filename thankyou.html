@@ -4,13 +4,114 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thank You - TheXPro Shopping</title>
-  <link rel="stylesheet" href="styles/styles.css">
+  <style>
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    /* Header */
+    .header {
+      background-color: #fff;
+      padding: 20px 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    /* Thank You Section */
+    .thank-you {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .thank-you h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    .thank-you p {
+      font-size: 1.1em;
+      margin-bottom: 30px;
+    }
+
+    .thank-you button {
+      padding: 15px 30px;
+      background-color: #ff6f61;
+      border: none;
+      border-radius: 30px;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .thank-you button:hover {
+      background-color: #ff4f3b;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
+  <header class="header">
+    <div class="container">
+      <div class="logo">TheXPro</div>
+      <nav class="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="cart.html">Cart</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
   <section class="thank-you">
-    <h1>Thank You!</h1>
-    <p>Your order has been received. We'll notify you with the details.</p>
-    <a href="index.html" class="cta-button">Return to Home</a>
+    <h1>Thank You for Your Order!</h1>
+    <p>Your order has been successfully processed. We will notify you once it's shipped.</p>
+    <button onclick="window.location.href='index.html'">Back to Shopping</button>
   </section>
+
+  <footer>
+    <div class="footer-container">
+      <p>&copy; 2024 TheXPro Shopping. All rights reserved.</p>
+    </div>
+  </footer>
 </body>
 </html>
