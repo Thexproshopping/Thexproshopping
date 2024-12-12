@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>eCommerce - Cart</title>
+  <title>eCommerce - Home</title>
   <link rel="stylesheet" href="styles/styles.css">
   <link rel="stylesheet" href="styles/responsive.css">
   <link rel="stylesheet" href="styles/animations.css">
@@ -12,21 +12,17 @@
   <header>
     <nav>
       <div class="logo">eCommerce</div>
-      <a href="index.html">Back to Shop</a>
+      <a href="cart.html">Go to Cart</a>
     </nav>
   </header>
 
   <main>
-    <h1>Your Cart</h1>
-    <div id="cart-items">
-      <!-- Cart items will be dynamically loaded from localStorage -->
+    <h1>Welcome to Our Shop!</h1>
+    <div class="product-grid">
+      <!-- Product items will be loaded here dynamically from JSON -->
     </div>
-    <div id="cart-total">
-      <strong>Total: $<span id="total-price">0.00</span></strong>
-    </div>
-    <button id="checkoutBtn">Checkout</button>
   </main>
 
-  <script src="scripts/cart.js"></script>
+  <script src="scripts/main.js"></script>
 </body>
 </html>
