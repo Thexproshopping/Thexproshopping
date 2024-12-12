@@ -19,7 +19,8 @@
         </ul>
       </nav>
       <div class="search-bar">
-        <input type="text" id="search" placeholder="Search products...">
+        <input type="text" id="search" placeholder="Search products..." aria-label="Search products">
+        <button id="search-button" aria-label="Search"><span>🔍</span></button>
       </div>
     </div>
   </header>
@@ -43,5 +44,21 @@
   </footer>
 
   <script src="scripts/main.js"></script>
+  <script>
+    // Error handling for dynamic product loading
+    try {
+      // Simulate product loading
+      loadProducts();
+    } catch (error) {
+      console.error("Error loading products:", error);
+      document.getElementById('product-grid').innerHTML = "<p>Sorry, we couldn't load the products at this time. Please try again later.</p>";
+    }
+
+    function loadProducts() {
+      // Simulated function to load products
+      // This is where you would typically fetch data from an API
+      throw new Error("Simulated product loading error"); // Simulating an error for demonstration
+    }
+  </script>
 </body>
 </html>
