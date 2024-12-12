@@ -1,75 +1,127 @@
-/* mobile-first approach */
+/* Responsive styles for mobile and tablet devices */
 
-/* Base styles for small screens (mobile) */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+/* For screens smaller than or equal to 768px */
+@media (max-width: 768px) {
+    /* Adjust product grid layout for small screens */
+    .product-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px; /* Add some padding to avoid the edge of the screen */
+    }
+
+    .product-card {
+        width: 100%; /* Make product cards take up full width */
+        margin-bottom: 20px; /* Space between product cards */
+    }
+
+    .cart-summary {
+        padding: 15px; /* Adjust padding in cart summary for smaller screens */
+    }
+
+    header .logo {
+        font-size: 1.5rem; /* Adjust logo size for mobile */
+    }
+
+    footer {
+        font-size: 0.8rem; /* Adjust footer font size */
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        padding-left: 0;
+        margin: 0;
+    }
+
+    .navbar ul li {
+        margin-bottom: 10px; /* Space out the links */
+    }
+
+    .search-bar input {
+        width: 100%; /* Make search bar input field full width */
+        padding: 10px; /* Add padding for better touch target */
+    }
+
+    .hero {
+        padding: 50px 20px; /* Adjust padding for hero section */
+    }
+
+    .hero-content h1 {
+        font-size: 2rem; /* Adjust headline size */
+    }
 }
 
-header {
-  background-color: #333;
-  color: white;
-  padding: 1rem;
+/* For screens smaller than or equal to 1024px (tablets and small desktops) */
+@media (max-width: 1024px) {
+    /* Adjust the layout of the product cards for tablets and smaller desktops */
+    .product-card {
+        width: 90%; /* Make product cards smaller and aligned */
+        margin: 10px auto; /* Center the product cards */
+    }
+
+    .product-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .cart-summary {
+        padding: 20px; /* Increase padding for better visual spacing */
+    }
+
+    header {
+        padding: 10px 20px; /* Adjust header padding for medium screens */
+    }
+
+    footer {
+        padding: 20px; /* Add some padding to the footer */
+    }
+
+    .navbar ul li a {
+        font-size: 1rem; /* Adjust font size for navigation links */
+    }
+
+    .search-bar input {
+        font-size: 1rem; /* Adjust font size of the search bar */
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem; /* Slightly bigger headline */
+    }
 }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  margin: 0 10px;
-}
+/* For screens larger than 1024px (desktops and large tablets) */
+@media (min-width: 1025px) {
+    /* Adjust grid layout for larger screens (desktop) */
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid for larger screens */
+        gap: 20px;
+    }
 
-.container {
-  width: 100%;
-  padding: 1rem;
-}
+    .cart-summary {
+        padding: 25px; /* Add padding for a spacious cart summary */
+    }
 
-.product-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-}
+    .product-card {
+        margin: 20px; /* Add more margin to product cards for spacious layout */
+    }
 
-.product-card {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border: 1px solid #ddd;
-  text-align: center;
-}
+    .navbar ul {
+        display: flex;
+        justify-content: flex-start;
+        gap: 30px; /* Increase the gap between navbar links */
+    }
 
-button {
-  padding: 10px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
+    .navbar ul li {
+        margin-right: 30px; /* Space between navbar items */
+    }
 
-/* Tablet styles */
-@media (min-width: 768px) {
-  .product-grid {
-    grid-template-columns: 1fr 1fr;
-  }
+    header {
+        padding: 20px 50px; /* Adjust padding for header */
+    }
 
-  nav {
-    display: flex;
-    justify-content: space-between;
-  }
-}
-
-/* Desktop styles */
-@media (min-width: 1024px) {
-  .product-grid {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .logo {
-    font-size: 1.5rem;
-  }
+    .footer-container {
+        padding: 30px; /* Add space around footer */
+    }
 }
