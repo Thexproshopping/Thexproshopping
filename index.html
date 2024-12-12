@@ -4,233 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TheXPro Shopping - Home</title>
-  <style>
-    /* Global Styles */
-    body, html {
-      margin: 0;
-      padding: 0;
-      font-family: 'Arial', sans-serif;
-      color: #333;
-      background-color: #f9f9f9;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* Header Styles */
-    .header {
-      background-color: #007bff;
-      color: white;
-      padding: 15px 20px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .header .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .navbar ul {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-    }
-
-    .navbar ul li a {
-      color: white;
-      font-size: 1rem;
-    }
-
-    .search-bar input {
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      width: 250px;
-    }
-
-    .search-bar input::placeholder {
-      color: #777;
-    }
-
-    /* Hero Section */
-    .hero {
-      background: url('images/hero-bg.jpg') no-repeat center center/cover;
-      height: 400px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: white;
-      box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
-    }
-
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      max-width: 600px;
-    }
-
-    /* Products Section */
-    .products {
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    .products h2 {
-      font-size: 2rem;
-      color: #007bff;
-      margin-bottom: 20px;
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-    }
-
-    .product-card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      padding: 15px;
-      text-align: center;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    }
-
-    .product-card img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 5px;
-      margin-bottom: 10px;
-    }
-
-    .product-card h3 {
-      font-size: 1.2rem;
-      margin: 10px 0;
-    }
-
-    .product-card p {
-      font-size: 1rem;
-      color: #007bff;
-      margin-bottom: 15px;
-    }
-
-    .product-card button {
-      background-color: #007bff;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .product-card button:hover {
-      background-color: #0056b3;
-    }
-
-    /* Footer Styles */
-    footer {
-      background-color: #333;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-
-    footer p {
-      font-size: 0.9rem;
-    }
-  </style>
+  <link rel="stylesheet" href="styles/styles.css">
+  <link rel="stylesheet" href="styles/responsive.css">
+  <link rel="stylesheet" href="styles/animations.css">
 </head>
 <body>
-  <!-- Header -->
   <header class="header">
     <div class="container">
-      <div class="logo">TheXPro</div>
+      <div class="logo">TheXProShopping</div>
       <nav class="navbar">
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="cart.html">Cart</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="cart.html">Cart 🛒</a></li>
         </ul>
       </nav>
       <div class="search-bar">
-        <input type="text" id="search" placeholder="Search products..." />
+        <input type="text" id="search" placeholder="Search products...">
       </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Welcome to TheXPro Shopping</h1>
-      <p>Your destination for exclusive products at unbeatable prices.</p>
-    </div>
-  </section>
+  <main>
+    <section class="hero">
+      <h1>Welcome to TheXProShopping</h1>
+      <p>Shop premium products at unbeatable prices!</p>
+    </section>
 
-  <!-- Products Section -->
-  <section class="products">
-    <h2>Featured Products</h2>
-    <div class="product-grid" id="product-grid">
-      <!-- Dynamic product cards will be added here -->
-    </div>
-  </section>
+    <section class="products">
+      <h2>Our Products</h2>
+      <div id="product-grid" class="product-grid">
+        <!-- Products will load dynamically -->
+      </div>
+    </section>
+  </main>
 
-  <!-- Footer -->
   <footer>
-    <p>&copy; 2024 TheXPro Shopping. All rights reserved.</p>
+    <p>&copy; 2024 TheXProShopping. All rights reserved.</p>
   </footer>
 
-  <script>
-    try {
-      // Fetch products dynamically
-      const products = [
-        { name: 'Smart Watch', price: '$99.99', image: 'images/product1.jpg' },
-        { name: 'Wireless Earbuds', price: '$29.99', image: 'images/product2.jpg' },
-        { name: 'Bluetooth Speaker', price: '$49.99', image: 'images/product3.jpg' }
-      ];
-
-      const productGrid = document.getElementById('product-grid');
-
-      products.forEach(product => {
-        const productCard = document.createElement('div');
-        productCard.classList.add('product-card');
-        productCard.innerHTML = `
-          <img src="${product.image}" alt="${product.name}">
-          <h3>${product.name}</h3>
-          <p>${product.price}</p>
-          <button onclick="addToCart('${product.name}', '${product.price}')">Add to Cart 🛒</button>
-        `;
-        productGrid.appendChild(productCard);
-      });
-
-      function addToCart(name, price) {
-        alert(`${name} added to your cart.`);
-        // Cart functionality would be implemented here
-      }
-    } catch (error) {
-      console.error('Error loading products:', error.message);
-      alert('Error loading products. Please try again later.');
-    }
-  </script>
+  <script src="scripts/main.js"></script>
 </body>
 </html>
