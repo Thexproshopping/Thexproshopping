@@ -32,7 +32,7 @@
   }
 }
 
-/* Product Card Hover Effect */
+/* Product Card Hover */
 .product-card {
   animation: fadeIn 0.5s ease-out;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -44,39 +44,12 @@
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Hero Text Fade In */
-.hero-text {
-  animation: fadeIn 1s ease-in-out;
-}
-
-/* Button Hover Effect */
+/* Button Hover */
 .cta-button {
   transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .cta-button:hover {
-  background-color: #45a049;
   transform: scale(1.1);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Product Grid Animation (fade in for individual product cards) */
-.product-grid {
-  animation: slideUp 1s ease-out;
-}
-
-/* Fade-in for Footer */
-footer {
-  animation: fadeIn 1.5s ease-in-out;
-}
-
-/* Mobile and Tablet Animations */
-@media (max-width: 768px) {
-  .hero-text h1 {
-    font-size: 2.5rem;
-  }
-
-  .product-card {
-    animation: fadeIn 0.6s ease-out;
-  }
 }
