@@ -1,1 +1,12 @@
-
+[
+  {
+    "orderId": 1,
+    "customerName": "John Doe",
+    "email": "johndoe@example.com",
+    "cartDetails": [
+      { "name": "Product 1", "price": 20.99, "quantity": 2 },
+      { "name": "Product 2", "price": 45.99, "quantity": 1 }
+    ],
+    "total": 87.97
+  }
+]
