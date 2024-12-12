@@ -1,232 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The Explore Shopping - Your one-stop e-commerce store.">
-    <meta name="author" content="The Explore Shopping">
-    <title>The Explore Shopping</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>TheXproShopping - Home</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Basic Reset */
-        * {
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', Arial, sans-serif;
-            line-height: 1.6;
-            background-color: #eef2f5;
+            background-color: #f8f9fa;
             color: #333;
         }
 
-        /* Navbar */
-        nav {
+        header {
+            background-color: #007bff;
+            padding: 15px 20px;
+            color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #333;
-            color: #fff;
-            padding: 1rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
         }
 
-        nav .brand {
-            font-size: 1.5rem;
-            font-weight: bold;
+        header h1 {
+            margin: 0;
         }
 
-        nav ul {
-            list-style: none;
+        nav {
             display: flex;
-            gap: 1rem;
+            gap: 15px;
         }
 
-        nav ul li {
-            cursor: pointer;
-        }
-
-        nav ul li a {
-            color: #fff;
+        nav a {
+            color: white;
             text-decoration: none;
+            font-size: 1.2em;
         }
 
-        /* Hero Section */
         .hero {
-            background: url('hero-bg.jpg') no-repeat center/cover;
-            height: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background-image: url('hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
             text-align: center;
-            color: #fff;
-            position: relative;
+            padding: 50px 20px;
+            color: white;
         }
 
-        .hero h1 {
-            font-size: 2.5rem;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 1rem;
-            border-radius: 10px;
+        .hero h2 {
+            font-size: 2.5em;
+            margin: 0 0 20px;
         }
 
-        .search-bar {
-            position: absolute;
-            bottom: 20px;
-            width: 80%;
-            margin: 0 auto;
-        }
-
-        .search-bar input {
-            width: 100%;
+        .hero input[type="text"] {
             padding: 10px;
             font-size: 1rem;
+            width: 80%;
+            max-width: 400px;
+            border: none;
             border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .hero button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
             border: none;
-            outline: none;
-        }
-
-        /* Products Section */
-        .products {
-            padding: 2rem;
-        }
-
-        .products h2 {
-            text-align: center;
-            margin-bottom: 1rem;
-            color: #0066cc;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .product {
-            border: 1px solid #ddd;
-            padding: 1rem;
-            text-align: center;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .product img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 1rem;
-        }
-
-        .product h3 {
-            font-size: 1.25rem;
-        }
-
-        .product .price {
-            color: #27ae60;
-            margin: 0.5rem 0;
-        }
-
-        .product button {
-            background-color: #333;
-            color: #fff;
-            border: none;
-            padding: 0.5rem 1rem;
+            border-radius: 5px;
             cursor: pointer;
+        }
+
+        .filter-section {
+            padding: 20px;
+            background: #fff;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .filter-section label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .product-card .details {
+            padding: 15px;
+        }
+
+        .product-card button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .reviews {
+            padding: 10px;
+        }
+
+        .review-form {
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .review-form input, .review-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
             border-radius: 5px;
         }
 
-        .product button:hover {
-            background-color: #555;
+        .social-share {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 10px;
         }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background-color: #333;
-            color: #fff;
-            margin-top: 2rem;
+        .social-share button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
-
 <body>
-    <!-- Navigation Bar -->
-    <nav>
-        <div class="brand">The Explore Shopping</div>
-        <ul>
-            <li><a href="#products">Products</a></li>
-            <li><a href="#cart">Cart</a></li>
-        </ul>
-    </nav>
+    <header>
+        <h1>TheXproShopping</h1>
+        <nav>
+            <a href="index.html" aria-label="Home">Home</a>
+            <a href="products.html" aria-label="Products">Products</a>
+            <a href="cart.html" aria-label="Cart">Cart</a>
+        </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" aria-label="Hero Section">
-        <h1>Welcome to The Explore Shopping</h1>
-        <div class="search-bar">
-            <input type="text" id="search" placeholder="Search for products..." oninput="searchProducts(this.value)">
-        </div>
+    <section class="hero" aria-labelledby="hero-heading">
+        <h2 id="hero-heading">Welcome to TheXproShopping</h2>
+        <input type="text" placeholder="Search for products" aria-label="Search">
+        <button aria-label="Search products">Search</button>
     </section>
 
-    <!-- Products Section -->
-    <section id="products" class="products" aria-labelledby="products-heading">
-        <h2 id="products-heading">Our Products</h2>
-        <div class="product-grid">
-            <!-- Products dynamically inserted here -->
-        </div>
+    <section class="filter-section" aria-labelledby="filter-heading">
+        <h2 id="filter-heading">Filter Products</h2>
+        <label for="category-filter">Category</label>
+        <select id="category-filter" onchange="filterProducts()">
+            <option value="all">All</option>
+            <option value="electronics">Electronics</option>
+            <option value="fashion">Fashion</option>
+            <option value="home">Home</option>
+        </select>
+        <label for="price-filter">Price</label>
+        <input type="range" id="price-filter" min="0" max="1000" step="50" onchange="filterProducts()">
+        <label for="rating-filter">Rating</label>
+        <input type="number" id="rating-filter" min="1" max="5" step="0.5" onchange="filterProducts()">
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 The Explore Shopping. All rights reserved.</p>
-    </footer>
+    <section class="products" id="product-list" aria-labelledby="products-heading">
+        <h2 id="products-heading" class="visually-hidden">Products</h2>
+        <!-- Products will be dynamically loaded here -->
+    </section>
 
     <script>
-        // Initialize product data
         const products = [
-            { id: 1, name: "Smart Watch", price: 2999, image: "product1.jpg" },
-            { id: 2, name: "Wireless Earbuds", price: 799, image: "product2.jpg" },
-            { id: 3, name: "Gaming Headset", price: 1500, image: "product3.jpg" },
-            { id: 4, name: "Smartphone", price: 12000, image: "product4.jpg" },
-            { id: 5, name: "Bluetooth Speaker", price: 1200, image: "product5.jpg" }
+            { id: 1, name: "Smartphone", category: "electronics", price: 500, rating: 4.5, image: "phone.jpg" },
+            { id: 2, name: "Shoes", category: "fashion", price: 80, rating: 4, image: "shoes.jpg" },
+            { id: 3, name: "Vacuum Cleaner", category: "home", price: 200, rating: 4.8, image: "vacuum.jpg" }
         ];
 
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-        function renderProducts(filter = "") {
-            const productGrid = document.querySelector('.product-grid');
-            const filteredProducts = products.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()));
-            productGrid.innerHTML = filteredProducts.map(product => `
-                <div class="product">
+        function loadProducts() {
+            const productList = document.getElementById("product-list");
+            productList.innerHTML = "";
+            products.forEach(product => {
+                const productCard = document.createElement("div");
+                productCard.classList.add("product-card");
+                productCard.innerHTML = `
                     <img src="${product.image}" alt="${product.name}" loading="lazy">
-                    <h3>${product.name}</h3>
-                    <p class="price">₹${product.price}</p>
-                    <button onclick="addToCart(${product.id})">Add to Cart</button>
-                </div>
-            `).join('');
+                    <div class="details">
+                        <h3>${product.name}</h3>
+                        <p>₹${product.price}</p>
+                        <p>Rating: ${product.rating}</p>
+                        <button onclick="addToCart(${product.id})">Add to Cart</button>
+                    </div>
+                    <div class="reviews">
+                        <h4>Reviews</h4>
+                        <div id="reviews-${product.id}"></div>
+                        <form class="review-form" onsubmit="submitReview(event, ${product.id})">
+                            <input type="text" placeholder="Your Name" required>
+                            <textarea placeholder="Your Review" required></textarea>
+                            <button>Submit</button>
+                        </form>
+                    </div>
+                    <div class="social-share">
+                        <button aria-label="Share on Facebook">FB</button>
+                        <button aria-label="Share on Twitter">TW</button>
+                    </div>
+                `;
+                productList.appendChild(productCard);
+            });
         }
 
-        function addToCart(id) {
-            const product = products.find(p => p.id === id);
-            cart.push(product);
-            localStorage.setItem("cart", JSON.stringify(cart));
-            alert(`${product.name} added to cart!`);
+        function addToCart(productId) {
+            // Add product to localStorage
+            alert("Added to cart!");
         }
 
-        function searchProducts(query) {
-            renderProducts(query);
+        function filterProducts() {
+            alert("Filter functionality here.");
         }
 
-        renderProducts();
+        function submitReview(event, productId) {
+            event.preventDefault();
+            alert(`Review submitted for product ${productId}`);
+        }
+
+        loadProducts();
     </script>
 </body>
-
 </html>
