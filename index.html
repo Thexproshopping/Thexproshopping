@@ -3,24 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>eCommerce Website</title>
+  <title>eCommerce - Cart</title>
   <link rel="stylesheet" href="styles/styles.css">
   <link rel="stylesheet" href="styles/responsive.css">
+  <link rel="stylesheet" href="styles/animations.css">
 </head>
 <body>
   <header>
     <nav>
       <div class="logo">eCommerce</div>
-      <input type="text" id="search-bar" placeholder="Search products..." oninput="filterProducts()">
-      <a href="cart.html">Cart</a>
+      <a href="index.html">Back to Shop</a>
     </nav>
   </header>
-  
+
   <main>
-    <h1>Products</h1>
-    <div class="product-grid" id="product-grid"></div>
+    <h1>Your Cart</h1>
+    <div id="cart-items">
+      <!-- Cart items will be dynamically loaded from localStorage -->
+    </div>
+    <div id="cart-total">
+      <strong>Total: $<span id="total-price">0.00</span></strong>
+    </div>
+    <button id="checkoutBtn">Checkout</button>
   </main>
 
-  <script src="scripts/main.js"></script>
+  <script src="scripts/cart.js"></script>
 </body>
 </html>
