@@ -3,162 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopSmart - Products</title>
+    <title>Home - TheXproShopping</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f8f9fa;
         }
-        header {
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
         }
-        nav a {
-            margin: 0 10px;
+        .header a {
             color: white;
             text-decoration: none;
+            font-size: 1.2em;
         }
         .hero {
-            text-align: center;
-            padding: 50px;
-            background: url('hero-bg.jpg') no-repeat center center / cover;
+            background: url('https://via.placeholder.com/1200x400') no-repeat center center;
+            background-size: cover;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             color: white;
+            text-align: center;
         }
         .hero input {
-            width: 300px;
             padding: 10px;
-            margin-right: 10px;
+            width: 300px;
+            margin-top: 20px;
+            border: none;
             border-radius: 5px;
         }
         .products {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
             padding: 20px;
         }
-        .product-card {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            overflow: hidden;
+        .product {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-        .product-card img {
+        .product img {
             width: 100%;
             height: 200px;
             object-fit: cover;
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
-        button {
-            background-color: #28a745;
+        .product img.lazy-load {
+            opacity: 1;
+        }
+        .product button {
+            background-color: #007bff;
             color: white;
             border: none;
-            padding: 10px 15px;
-            margin: 10px;
-            border-radius: 5px;
-        }
-        .filter-sort {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-        }
-        .filter-sort select, .filter-sort input {
             padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .product button:hover {
+            background-color: #0056b3;
+        }
+        .filters {
+            padding: 20px;
+            background-color: #f1f1f1;
+        }
+        .filters select {
+            padding: 10px;
+            margin-right: 10px;
             border-radius: 5px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>ShopSmart</h1>
-        <nav>
+    <header class="header">
+        <h1>TheXproShopping</h1>
+        <div>
             <a href="index.html">Home</a>
-            <a href="#products">Products</a>
             <a href="cart.html">Cart</a>
-        </nav>
+        </div>
     </header>
 
-    <section class="hero">
-        <h2>Find Your Favorite Products</h2>
-        <input type="text" id="search" placeholder="Search products" oninput="filterProducts()">
-    </section>
+    <div class="hero">
+        <div>
+            <h2>Find Your Best Products</h2>
+            <input type="text" id="search" placeholder="Search products...">
+        </div>
+    </div>
 
-    <section class="filter-sort">
-        <select id="category-filter" onchange="filterProducts()">
-            <option value="all">All Categories</option>
+    <div class="filters">
+        <select id="category-filter">
+            <option value="">All Categories</option>
             <option value="electronics">Electronics</option>
             <option value="fashion">Fashion</option>
+            <option value="home">Home</option>
         </select>
-        <input type="number" id="price-filter" placeholder="Max Price" oninput="filterProducts()">
-    </section>
+        <select id="price-filter">
+            <option value="">Price</option>
+            <option value="low-to-high">Low to High</option>
+            <option value="high-to-low">High to Low</option>
+        </select>
+        <button onclick="applyFilters()">Apply Filters</button>
+    </div>
 
-    <section class="products" id="products">
-        <!-- Products will be dynamically loaded here -->
+    <section class="products" id="product-list">
+        <!-- Products will be dynamically inserted here -->
     </section>
 
     <script>
         const products = [
-            { id: 1, name: "Smartphone", category: "electronics", price: 500, image: "phone.jpg" },
-            { id: 2, name: "Laptop", category: "electronics", price: 1000, image: "laptop.jpg" },
-            { id: 3, name: "Shoes", category: "fashion", price: 80, image: "shoes.jpg" }
+            { id: 1, name: 'Product 1', price: 500, category: 'electronics', image: 'https://via.placeholder.com/250' },
+            { id: 2, name: 'Product 2', price: 1000, category: 'fashion', image: 'https://via.placeholder.com/250' },
+            { id: 3, name: 'Product 3', price: 300, category: 'home', image: 'https://via.placeholder.com/250' },
+            { id: 4, name: 'Product 4', price: 200, category: 'electronics', image: 'https://via.placeholder.com/250' },
+            // Add more products as needed
         ];
 
-        function loadProducts() {
-            const productContainer = document.getElementById('products');
-            productContainer.innerHTML = '';
-            products.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.classList.add('product-card');
-                productCard.innerHTML = `
-                    <img src="${product.image}" alt="${product.name}" loading="lazy">
+        let filteredProducts = [...products];
+
+        // Apply filters based on category and price
+        function applyFilters() {
+            const category = document.getElementById('category-filter').value;
+            const price = document.getElementById('price-filter').value;
+
+            filteredProducts = products.filter(product => {
+                const categoryMatch = category ? product.category === category : true;
+                let priceMatch = true;
+                if (price === 'low-to-high') {
+                    priceMatch = product.price <= 500;
+                } else if (price === 'high-to-low') {
+                    priceMatch = product.price >= 1000;
+                }
+                return categoryMatch && priceMatch;
+            });
+            renderProducts();
+        }
+
+        // Render products dynamically
+        function renderProducts() {
+            const productList = document.getElementById('product-list');
+            productList.innerHTML = '';
+            filteredProducts.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('product');
+                productDiv.innerHTML = `
+                    <img src="${product.image}" data-src="${product.image}" class="lazy-load" alt="${product.name}">
                     <h3>${product.name}</h3>
-                    <p>Price: $${product.price}</p>
+                    <p>₹${product.price}</p>
                     <button onclick="addToCart(${product.id})">Add to Cart</button>
                 `;
-                productContainer.appendChild(productCard);
+                productList.appendChild(productDiv);
+            });
+            lazyLoadImages();
+        }
+
+        // Lazy load images
+        function lazyLoadImages() {
+            const images = document.querySelectorAll('img.lazy-load');
+            images.forEach(img => {
+                if (img.getBoundingClientRect().top < window.innerHeight) {
+                    img.src = img.dataset.src;
+                }
             });
         }
 
+        // Add item to cart
         function addToCart(productId) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
             const product = products.find(p => p.id === productId);
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
             cart.push(product);
             localStorage.setItem('cart', JSON.stringify(cart));
-            alert(`${product.name} added to cart!`);
         }
 
-        function filterProducts() {
-            const searchQuery = document.getElementById('search').value.toLowerCase();
-            const category = document.getElementById('category-filter').value;
-            const maxPrice = document.getElementById('price-filter').value;
-
-            const filteredProducts = products.filter(product => {
-                return (
-                    product.name.toLowerCase().includes(searchQuery) &&
-                    (category === 'all' || product.category === category) &&
-                    (!maxPrice || product.price <= maxPrice)
-                );
-            });
-
-            const productContainer = document.getElementById('products');
-            productContainer.innerHTML = '';
-            filteredProducts.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.classList.add('product-card');
-                productCard.innerHTML = `
-                    <img src="${product.image}" alt="${product.name}" loading="lazy">
-                    <h3>${product.name}</h3>
-                    <p>Price: $${product.price}</p>
-                    <button onclick="addToCart(${product.id})">Add to Cart</button>
-                `;
-                productContainer.appendChild(productCard);
-            });
-        }
-
-        loadProducts();
+        // Initial render
+        renderProducts();
     </script>
 </body>
 </html>
