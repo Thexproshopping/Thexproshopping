@@ -3,35 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Cart</title>
+  <title>My Cart - TheXPro Shopping</title>
   <link rel="stylesheet" href="styles/styles.css">
   <link rel="stylesheet" href="styles/responsive.css">
   <link rel="stylesheet" href="styles/animations.css">
 </head>
 <body>
-  <header>
-    <nav>
-      <div class="logo">ShopEasy</div>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="cart.html">Cart</a></li>
-      </ul>
-    </nav>
+  <header class="header">
+    <div class="container">
+      <div class="logo">TheXPro</div>
+      <nav class="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="cart.html">Cart</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <section class="cart">
     <h1>Your Cart</h1>
     <div class="cart-items" id="cart-items">
-      <!-- Cart items loaded dynamically -->
+      <!-- Dynamic cart items -->
     </div>
     <div class="cart-summary">
-      <p>Subtotal: <span id="subtotal">$0.00</span></p>
+      <p>Total: <span id="total">$0.00</span></p>
       <button id="checkout-btn" class="cta-button">Checkout</button>
     </div>
   </section>
 
   <footer>
-    <p>&copy; 2024 ShopEasy. All Rights Reserved.</p>
+    <p>&copy; 2024 TheXPro Shopping. All rights reserved.</p>
   </footer>
 
   <script src="scripts/cart.js"></script>
