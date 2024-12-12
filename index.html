@@ -1,81 +1,167 @@
-# TheXPro Shopping - Home Page
-
-## Requirement Summary
-This document outlines the HTML structure for the home page of TheXPro Shopping, an e-commerce platform. The code includes a header with navigation, a hero section, a featured products section, and a footer. Additionally, enhancements have been made to the CSS to ensure the page is visually appealing and user-friendly, similar to popular e-commerce stores.
-
-## Code Generated
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TheXPro Shopping - Home</title>
-  <link rel="stylesheet" href="styles/styles.css">
-  <link rel="stylesheet" href="styles/responsive.css">
-  <link rel="stylesheet" href="styles/animations.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    /* Global Styles */
+    body, html {
       margin: 0;
       padding: 0;
-      background-color: #f4f4f4;
+      font-family: 'Arial', sans-serif;
+      color: #333;
+      background-color: #f9f9f9;
     }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header Styles */
     .header {
-      background-color: #333;
-      color: #fff;
-      padding: 10px 0;
+      background-color: #007bff;
+      color: white;
+      padding: 15px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
+
     .header .container {
       display: flex;
       justify-content: space-between;
       align-items: center;
       max-width: 1200px;
       margin: auto;
-      padding: 0 20px;
     }
+
     .navbar ul {
       list-style: none;
-      padding: 0;
+      display: flex;
+      gap: 20px;
     }
-    .navbar ul li {
-      display: inline;
-      margin-right: 20px;
-    }
+
     .navbar ul li a {
-      color: #fff;
-      text-decoration: none;
+      color: white;
+      font-size: 1rem;
     }
+
     .search-bar input {
-      padding: 5px;
+      padding: 10px;
       border: none;
       border-radius: 5px;
+      width: 250px;
     }
+
+    .search-bar input::placeholder {
+      color: #777;
+    }
+
+    /* Hero Section */
     .hero {
       background: url('images/hero-bg.jpg') no-repeat center center/cover;
-      color: #fff;
+      height: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      padding: 100px 20px;
+      color: white;
+      box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
     }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+    }
+
+    /* Products Section */
     .products {
-      padding: 20px;
+      padding: 40px 20px;
       text-align: center;
     }
+
+    .products h2 {
+      font-size: 2rem;
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px;
-      margin-top: 20px;
     }
-    .footer-container {
+
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 15px;
       text-align: center;
-      padding: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .product-card h3 {
+      font-size: 1.2rem;
+      margin: 10px 0;
+    }
+
+    .product-card p {
+      font-size: 1rem;
+      color: #007bff;
+      margin-bottom: 15px;
+    }
+
+    .product-card button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .product-card button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Footer Styles */
+    footer {
       background-color: #333;
-      color: #fff;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header class="header">
     <div class="container">
       <div class="logo">TheXPro</div>
@@ -83,6 +169,8 @@ This document outlines the HTML structure for the home page of TheXPro Shopping,
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="cart.html">Cart</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
       <div class="search-bar">
@@ -91,50 +179,57 @@ This document outlines the HTML structure for the home page of TheXPro Shopping,
     </div>
   </header>
 
+  <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
       <h1>Welcome to TheXPro Shopping</h1>
-      <p>Exclusive products, unbeatable prices!</p>
+      <p>Your destination for exclusive products at unbeatable prices.</p>
     </div>
   </section>
 
+  <!-- Products Section -->
   <section class="products">
     <h2>Featured Products</h2>
     <div class="product-grid" id="product-grid">
-      <!-- Dynamic product cards will be inserted here -->
+      <!-- Dynamic product cards will be added here -->
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
-    <div class="footer-container">
-      <p>&copy; 2024 TheXPro Shopping. All rights reserved.</p>
-    </div>
+    <p>&copy; 2024 TheXPro Shopping. All rights reserved.</p>
   </footer>
 
-  <script src="scripts/main.js"></script>
   <script>
-    // Error handling for dynamic content loading
     try {
-      // Simulate dynamic product loading
-      const productGrid = document.getElementById('product-grid');
-      if (!productGrid) throw new Error('Product grid element not found.');
-
-      // Example of dynamically adding products
+      // Fetch products dynamically
       const products = [
-        { name: 'Product 1', price: '$10' },
-        { name: 'Product 2', price: '$20' },
-        { name: 'Product 3', price: '$30' }
+        { name: 'Smart Watch', price: '$99.99', image: 'images/product1.jpg' },
+        { name: 'Wireless Earbuds', price: '$29.99', image: 'images/product2.jpg' },
+        { name: 'Bluetooth Speaker', price: '$49.99', image: 'images/product3.jpg' }
       ];
+
+      const productGrid = document.getElementById('product-grid');
 
       products.forEach(product => {
         const productCard = document.createElement('div');
-        productCard.className = 'product-card';
-        productCard.innerHTML = `<h3>${product.name}</h3><p>${product.price}</p>`;
+        productCard.classList.add('product-card');
+        productCard.innerHTML = `
+          <img src="${product.image}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          <p>${product.price}</p>
+          <button onclick="addToCart('${product.name}', '${product.price}')">Add to Cart 🛒</button>
+        `;
         productGrid.appendChild(productCard);
       });
+
+      function addToCart(name, price) {
+        alert(`${name} added to your cart.`);
+        // Cart functionality would be implemented here
+      }
     } catch (error) {
       console.error('Error loading products:', error.message);
-      alert('There was an error loading the products. Please try again later.');
+      alert('Error loading products. Please try again later.');
     }
   </script>
 </body>
