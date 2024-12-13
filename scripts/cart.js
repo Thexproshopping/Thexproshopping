@@ -1,92 +1,104 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const cartItemsContainer = document.getElementById('cart-items');
-    const subtotalElement = document.getElementById('subtotal');
-    const totalElement = document.getElementById('total');
-    const discountCodeInput = document.getElementById('discount-code');
-    const applyDiscountButton = document.getElementById('apply-discount');
-    const checkoutButton = document.getElementById('checkout-btn');
+  const cartItemsContainer = document.getElementById('cart-items');
+  const subtotalElement = document.getElementById('subtotal');
+  const totalElement = document.getElementById('total');
+  const discountCodeInput = document.getElementById('discount-code');
+  const applyDiscountButton = document.getElementById('apply-discount');
+  const checkoutButton = document.getElementById('checkout-btn');
 
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let discountApplied = false;
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let discountApplied = false;
 
-    function updateCart() {
-        cartItemsContainer.innerHTML = '';
+  function updateCart() {
+    cartItemsContainer.innerHTML = '';
 
-        if (cart.length === 0) {
-            cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
-            subtotalElement.textContent = '0.00';
-            totalElement.textContent = '0.00';
-            return;
-        }
-
-        let subtotal = 0;
-
-        cart.forEach(item => {
-            const itemElement = document.createElement('div');
-            itemElement.className = 'cart-item';
-            itemElement.innerHTML = `
-                <p>${item.name} - $${(item.price * item.quantity).toFixed(2)} (${item.quantity} pcs)</p>
-                <button class="remove-item" data-id="${item.id}">Remove</button>
-            `;
-            cartItemsContainer.appendChild(itemElement);
-
-            subtotal += item.price * item.quantity;
-        });
-
-        subtotalElement.textContent = subtotal.toFixed(2);
-        totalElement.textContent = subtotal.toFixed(2);
-        localStorage.setItem('cart', JSON.stringify(cart));
+    if (cart.length === 0) {
+      cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+      subtotalElement.textContent = '0.00';
+      totalElement.textContent = '0.00';
+      return;
     }
 
-    cartItemsContainer.addEventListener('click', event => {
-        if (event.target.classList.contains('remove-item')) {
-            const itemId = parseInt(event.target.getAttribute('data-id'));
-            cart = cart.filter(item => item.id !== itemId);
-            updateCart();
-            alert('Item removed from cart.');
-        }
+    let subtotal = 0;
+
+    cart.forEach(item => {
+      const itemElement = document.createElement('div');
+      itemElement.className = 'cart-item';
+      itemElement.innerHTML = `
+        <p>${item.name} - $${(item.price * item.quantity).toFixed(2)} (${item.quantity} pcs)</p>
+        <button class="remove-item" data-id="${item.id}">Remove</button>
+      `;
+      cartItemsContainer.appendChild(itemElement);
+
+      subtotal += item.price * item.quantity;
     });
 
-    applyDiscountButton.addEventListener('click', () => {
-        if (discountApplied) {
-            alert('Discount already applied.');
-            return;
-        }
+    subtotalElement.textContent = subtotal.toFixed(2);
+    totalElement.textContent = subtotal.toFixed(2);
 
-        const discountCode = discountCodeInput.value.trim().toUpperCase();
-        const subtotal = parseFloat(subtotalElement.textContent);
+    // Save cart to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
 
-        if (discountCode === 'SAVE10') {
-            const discountAmount = subtotal * 0.10;
-            const newTotal = subtotal - discountAmount;
-            totalElement.textContent = newTotal.toFixed(2);
-            discountApplied = true;
-            alert(`Discount applied! You saved $${discountAmount.toFixed(2)}.`);
-        } else {
-            alert('Invalid discount code.');
-        }
-    });
+  // Remove item from cart
+  cartItemsContainer.addEventListener('click', event => {
+    if (event.target.classList.contains('remove-item')) {
+      const itemId = parseInt(event.target.getAttribute('data-id'));
+      cart = cart.filter(item => item.id !== itemId);
+      updateCart();
+      alert('Item removed from cart.');
+    }
+  });
 
-    checkoutButton.addEventListener('click', () => {
-        if (cart.length === 0) {
-            alert('Your cart is empty.');
-            return;
-        }
+  // Apply discount code
+  applyDiscountButton.addEventListener('click', () => {
+    if (discountApplied) {
+      alert('Discount already applied.');
+      return;
+    }
 
-        const orderSummary = cart.map(item => `${item.name} (${item.quantity} pcs): $${(item.price * item.quantity).toFixed(2)}`).join('\n');
-        const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    const discountCode = discountCodeInput.value.trim().toUpperCase();
+    const subtotal = parseFloat(subtotalElement.textContent);
 
-        const orderData = {
-            customer_name: 'John Doe',  // Replace with actual customer input
-            email: 'customer@example.com', // Replace with actual customer input
-            order_summary: orderSummary,
-            total: `$${totalAmount.toFixed(2)}`
-        };
+    if (discountCode === 'SAVE10') {
+      const discountAmount = subtotal * 0.10;
+      const newTotal = subtotal - discountAmount;
+      totalElement.textContent = newTotal.toFixed(2);
+      discountApplied = true;
+      alert(`Discount applied! You saved $${discountAmount.toFixed(2)}.`);
+    } else {
+      alert('Invalid discount code.');
+    }
+  });
 
-        sendOrderConfirmation(orderData);
+  // Proceed to checkout with EmailJS integration
+  checkoutButton.addEventListener('click', () => {
+    if (cart.length === 0) {
+      alert('Your cart is empty.');
+      return;
+    }
+
+    const orderSummary = cart.map(item => `${item.name} (${item.quantity} pcs): $${(item.price * item.quantity).toFixed(2)}`).join('\n');
+    const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+
+    const orderData = {
+      customer_name: 'John Doe',
+      email: 'customer@example.com',
+      order_summary: orderSummary,
+      total: `$${totalAmount.toFixed(2)}`
+    };
+
+    emailjs.send('service_qo8786l', 'template_109i6mr', orderData)
+      .then(response => {
+        alert('Order confirmed! A confirmation email has been sent.');
         localStorage.removeItem('cart');
         window.location.href = 'thankyou.html';
-    });
+      })
+      .catch(error => {
+        console.error('EmailJS Error:', error);
+        alert('Failed to send confirmation email. Please try again.');
+      });
+  });
 
-    updateCart();
+  updateCart();
 });
