@@ -12,110 +12,49 @@
 </head>
 
 <body>
+  <!-- Header -->
   <header class="header">
     <div class="container">
-      <!-- Logo -->
-      <div class="logo">
-        <a href="index.html">TheXProShopping</a>
-      </div>
-      
-      <!-- Navbar -->
+      <div class="logo"><a href="index.html">TheXProShopping</a></div>
       <nav class="navbar">
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="cart.html">Cart 🛒</a></li>
         </ul>
       </nav>
-
-      <!-- Search Bar -->
       <div class="search-bar">
         <input type="text" id="search" placeholder="Search products..." aria-label="Search products">
-        <button id="search-button" aria-label="Search"><span>🔍</span></button>
+        <button id="search-button" aria-label="Search">🔍</button>
       </div>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main>
-    <!-- Hero Section -->
-    <section class="hero">
-      <h1>Welcome to TheXProShopping</h1>
-      <p>Shop premium products at unbeatable prices!</p>
-    </section>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Welcome to TheXProShopping</h1>
+    <p>Shop premium products at unbeatable prices!</p>
+    <button onclick="scrollToProducts()">Start Shopping</button>
+  </section>
 
-    <!-- Products Section -->
-    <section class="products">
-      <h2>Our Products</h2>
-      <div id="product-grid" class="product-grid">
-        <!-- Dynamically loaded products will go here -->
-      </div>
-      <div id="loading-message" style="display: none;">Loading products...</div>
-      <div id="error-message" style="display: none; color: red;">Sorry, we couldn't load the products at this time. Please try again later.</div>
-    </section>
-  </main>
+  <!-- Products Section -->
+  <section id="products" class="products">
+    <h2>Our Products</h2>
+    <div id="product-grid" class="product-grid"></div>
+    <div id="loading-message" style="display: none;">Loading products...</div>
+    <div id="error-message" style="display: none; color: red;">Could not load products. Please try again later.</div>
+  </section>
 
-  <!-- Footer Section -->
+  <!-- Footer -->
   <footer>
     <p>&copy; 2024 TheXProShopping. All rights reserved.</p>
   </footer>
 
+  <!-- Scripts -->
   <script src="scripts/main.js"></script>
   <script>
-    // Simulate dynamic product loading with error handling
-    document.addEventListener("DOMContentLoaded", function () {
-      const productGrid = document.getElementById("product-grid");
-      const loadingMessage = document.getElementById("loading-message");
-      const errorMessage = document.getElementById("error-message");
-
-      loadingMessage.style.display = "block"; // Show loading message
-      errorMessage.style.display = "none"; // Hide error message
-
-      try {
-        loadProducts(); // Attempt to load products
-      } catch (error) {
-        console.error("Error loading products:", error);
-        loadingMessage.style.display = "none"; // Hide loading message
-        errorMessage.style.display = "block"; // Show error message
-      }
-
-      // Simulated function to load products
-      function loadProducts() {
-        // Simulating product data (replace with actual product fetching logic)
-        const products = [
-          {
-            name: "Wireless Headphones",
-            price: "$29.99",
-            image: "images/product1.jpg",
-          },
-          {
-            name: "Smartphone",
-            price: "$699.99",
-            image: "images/product2.jpg",
-          },
-        ];
-
-        loadingMessage.style.display = "none"; // Hide loading message
-
-        // Dynamically render product cards
-        products.forEach(product => {
-          const productCard = `
-            <div class="product-card">
-              <img src="${product.image}" alt="${product.name}">
-              <h3>${product.name}</h3>
-              <p>${product.price}</p>
-              <button onclick="addToCart('${product.name}', '${product.price}')">Add to Cart 🛒</button>
-            </div>
-          `;
-          productGrid.innerHTML += productCard;
-        });
-      }
-
-      // Simulated function to handle add-to-cart actions
-      window.addToCart = function (name, price) {
-        console.log(`Product added: ${name} - ${price}`);
-        // Add your cart logic here, for example, storing in localStorage
-      };
-    });
+    function scrollToProducts() {
+      document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+    }
   </script>
 </body>
 
