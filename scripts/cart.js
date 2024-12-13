@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
   let discountApplied = false;
 
+  // Function to update cart UI
   function updateCart() {
     cartItemsContainer.innerHTML = '';
 
@@ -82,13 +83,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
     const orderData = {
-      customer_name: 'John Doe',
-      email: 'customer@example.com',
+      customer_name: 'John Doe', // Replace with actual customer input
+      email: 'customer@example.com', // Replace with actual customer input
       order_summary: orderSummary,
       total: `$${totalAmount.toFixed(2)}`
     };
 
-    emailjs.send('service_qo8786l', 'template_109i6mr', orderData)
+    emailjs.send('service_qo8786l', 'template_8he07pf', orderData)
       .then(response => {
         alert('Order confirmed! A confirmation email has been sent.');
         localStorage.removeItem('cart');
@@ -100,5 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   });
 
+  // Initial cart update
   updateCart();
 });
