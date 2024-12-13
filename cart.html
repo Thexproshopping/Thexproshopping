@@ -4,50 +4,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="View and manage items in your cart at TheXProShopping.">
-  <title>Cart - TheXProShopping</title>
+  <title>TheXPro Shopping - Cart</title>
   <link rel="stylesheet" href="styles/styles.css">
 </head>
 
 <body>
-  <!-- Header -->
   <header class="header">
     <div class="container">
-      <div class="logo"><a href="index.html">TheXProShopping</a></div>
+      <div class="logo">TheXProShopping</div>
       <nav class="navbar">
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="cart.html" class="active">Cart 🛒</a></li>
+          <li><a href="cart.html">Cart 🛒</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- Main Content -->
   <main>
-    <section class="cart-section">
-      <div class="container">
-        <h1>Your Cart</h1>
-        <div id="cart-items" class="cart-items"></div>
-        <div class="cart-summary">
-          <p>Subtotal: <strong>$<span id="subtotal">0.00</span></strong></p>
-          <input type="text" id="discount-code" class="discount-input" placeholder="Enter discount code">
-          <button id="apply-discount" class="btn btn-primary">Apply Discount</button>
-          <p>Total: <strong>$<span id="total">0.00</span></strong></p>
-          <button id="checkout-btn" class="btn btn-primary">Place Order</button>
-        </div>
+    <section class="cart">
+      <h1>Your Cart</h1>
+      <div id="cart-items" class="cart-items">
+        <!-- Cart items will load dynamically -->
+      </div>
+      <div class="cart-summary">
+        <p>Subtotal: $<span id="subtotal">0.00</span></p>
+        <input type="text" id="discount-code" placeholder="Enter discount code">
+        <button id="apply-discount" class="btn">Apply Discount</button>
+        <p>Total: $<span id="total">0.00</span></p>
+        <button id="checkout-btn" class="btn">Proceed to Checkout</button>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
   <footer>
     <p>&copy; 2024 TheXProShopping. All rights reserved.</p>
   </footer>
 
-  <!-- Scripts -->
   <script src="scripts/cart.js"></script>
-  <script src="scripts/email.js"></script>
 </body>
 
 </html>
