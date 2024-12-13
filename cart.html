@@ -28,11 +28,7 @@
     <section class="cart-section">
       <div class="container">
         <h1>Your Cart</h1>
-        <div id="cart-items" class="cart-items">
-          <!-- Cart items will load dynamically via JavaScript -->
-        </div>
-
-        <!-- Cart Summary -->
+        <div id="cart-items" class="cart-items"></div>
         <div class="cart-summary">
           <p>Subtotal: <strong>$<span id="subtotal">0.00</span></strong></p>
           <input type="text" id="discount-code" class="discount-input" placeholder="Enter discount code">
@@ -45,15 +41,13 @@
   </main>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2024 <a href="index.html">TheXProShopping</a>. All rights reserved.</p>
-    </div>
+  <footer>
+    <p>&copy; 2024 TheXProShopping. All rights reserved.</p>
   </footer>
 
   <!-- Scripts -->
   <script src="scripts/cart.js"></script>
-  <script src="scripts/email.js"></script> <!-- EmailJS for sending order confirmation -->
+  <script src="scripts/email.js"></script>
 </body>
 
 </html>
