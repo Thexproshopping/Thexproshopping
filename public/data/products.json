@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Wireless Headphones",
+    "category": "electronics",
+    "price": 29.99,
+    "image": "public/images/product1.jpg",
+    "stock": 50,
+    "description": "High-quality wireless headphones with noise-cancellation and long battery life.",
+    "rating": 4.5,
+    "colors": ["black", "white"],
+    "alt": "Wireless Headphones - Black and White"
+  },
+  {
+    "id": 2,
+    "name": "Smartphone",
+    "category": "electronics",
+    "price": 699.99,
+    "image": "public/images/product2.jpg",
+    "stock": 30,
+    "description": "Latest model smartphone with high-speed performance and stunning display.",
+    "rating": 4.7,
+    "colors": ["black", "silver", "blue"],
+    "alt": "Smartphone in black, silver, and blue colors"
+  }
+]
