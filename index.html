@@ -1,62 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TheXPro Shopping - Home</title>
-  <link rel="stylesheet" href="styles/styles.css">
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.4.1/dist/email.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheXPro Shopping - Home</title>
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
-
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="container">
-      <div class="logo">TheXProShopping</div>
-      <nav class="navbar">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="cart.html">Cart 🛒</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <header class="header">
+        <div class="container">
+            <div class="logo">TheXProShopping</div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="cart.html">Cart 🛒</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1>Welcome to TheXPro Shopping</h1>
-    <p>Explore our exclusive collection of high-quality products at unbeatable prices!</p>
-    <button onclick="scrollToProducts()">Shop Now</button>
-  </section>
+    <main>
+        <section class="hero">
+            <h1>Welcome to TheXPro Shopping</h1>
+            <p>Find the best deals on the products you love.</p>
+            <button>Shop Now</button>
+        </section>
 
-  <!-- Product Grid -->
-  <section id="products" class="product-grid">
-    <!-- Products will be dynamically loaded here -->
-  </section>
+        <section id="products" class="product-grid">
+            <!-- Products will be dynamically loaded here -->
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2024 TheXProShopping. All rights reserved.</p>
-    <div class="social-links">
-      <a href="#">Facebook</a>
-      <a href="#">Twitter</a>
-      <a href="#">Instagram</a>
-    </div>
-  </footer>
+          
+        </section>
+    </main>
 
-  <!-- Scripts -->
-  <script src="scripts/main.js"></script>
-  <script>
-    // Initialize EmailJS
-    (function() {
-      emailjs.init("YOUR_USER_ID"); // Replace YOUR_USER_ID with your EmailJS user ID
-    })();
+    <footer>
+        <p>&copy; 2024 TheXProShopping. All rights reserved.</p>
+    </footer>
 
-    function scrollToProducts() {
-      document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-    }
-  </script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/email.js"></script> <!-- Include EmailJS Script -->
 </body>
-
 </html>
