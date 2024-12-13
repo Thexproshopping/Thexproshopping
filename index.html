@@ -1,43 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TheXPro Shopping</title>
-  <link rel="stylesheet" href="styles/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheXProShopping - Home</title>
+    <style>
+        /* Integrated Styles */
+
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+        }
+
+        nav ul li a {
+            padding: 5px 10px;
+            font-size: 1rem;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #007bff;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        .search-bar button {
+            padding: 8px 15px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background: #0056b3;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: url('public/images/hero.jpg') no-repeat center center/cover;
+            color: #fff;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .hero button {
+            padding: 15px 30px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .hero button:hover {
+            background: #0056b3;
+        }
+
+        /* Categories */
+        .categories {
+            padding: 40px 20px;
+            text-align: center;
+            background: #fff;
+        }
+
+        .categories h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .category-card {
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Product Grid */
+        .product-grid {
+            padding: 40px 20px;
+            background: #f8f8f8;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .product-card h3 {
+            margin: 10px 0;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .product-card p {
+            font-size: 1rem;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .product-card button {
+            padding: 10px 20px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .product-card button:hover {
+            background: #0056b3;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #f4f4f4;
+            margin-top: 40px;
+        }
+
+        footer .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        footer .social-links a {
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        footer .social-links a:hover {
+            color: #007bff;
+        }
+    </style>
 </head>
+
 <body>
+    <!-- Header -->
+    <header>
+        <div class="logo">TheXProShopping</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cart.html">Cart 🛒</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search for products...">
+                <button onclick="searchProducts()">Search</button>
+            </div>
+        </nav>
+    </header>
 
-  <!-- Header Section -->
-  <header class="header">
-    <div class="container">
-      <div class="logo">TheXProShopping</div>
-      <nav class="navbar">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="cart.html">Cart 🛒</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome to TheXProShopping</h1>
+        <p>Discover the best products at unbeatable prices!</p>
+        <button onclick="window.location.href='#products'">Shop Now</button>
+    </section>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1>Welcome to TheXPro Shopping</h1>
-    <p>Discover the latest in electronics, fashion, and more!</p>
-    <button>Shop Now</button>
-  </section>
+    <!-- Categories -->
+    <section class="categories">
+        <h2>Shop by Category</h2>
+        <div class="category-grid">
+            <div class="category-card">Electronics</div>
+            <div class="category-card">Fashion</div>
+            <div class="category-card">Home & Garden</div>
+            <div class="category-card">Sports</div>
+        </div>
+    </section>
 
-  <!-- Products Section -->
-  <section id="products" class="product-grid">
-    <!-- Products will be loaded dynamically by JavaScript -->
-  </section>
+    <!-- Product Grid -->
+    <section id="products" class="product-grid">
+        <!-- Products dynamically loaded here -->
+    </section>
 
-  <footer>
-    <p>&copy; 2024 TheXProShopping. All rights reserved.</p>
-  </footer>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 TheXProShopping. All rights reserved.</p>
+        <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Twitter</a>
+        </div>
+    </footer>
 
-  <!-- JavaScript -->
-  <script src="scripts/main.js"></script>
+    <script>
+        async function loadProducts() {
+            try {
+                const response = await fetch('public/data/products.json');
+                const products = await response.json();
+                displayProducts(products);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                alert('Failed to load products.');
+            }
+        }
+
+        function displayProducts(products) {
+            const productGrid = document.getElementById('products');
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <img src="public/images/${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>Price: $${product.price}</p>
+                    <button onclick="addToCart(${product.id})">Add to Cart</button>
+                `;
+                productGrid.appendChild(productCard);
+            });
+        }
+
+        function addToCart(productId) {
+            alert(`Product ${productId} added to cart!`);
+        }
+
+        function searchProducts() {
+            const query = document.getElementById('searchInput').value;
+            alert(`Searching for: ${query}`);
+        }
+
+        window.onload = loadProducts;
+    </script>
 </body>
+
 </html>
