@@ -4,58 +4,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TheXPro Shopping - Premium products at unbeatable prices. Shop now!">
   <title>TheXPro Shopping - Home</title>
   <link rel="stylesheet" href="styles/styles.css">
-  <link rel="stylesheet" href="styles/responsive.css">
-  <link rel="stylesheet" href="styles/animations.css">
 </head>
 
 <body>
-  <!-- Header -->
   <header class="header">
     <div class="container">
-      <div class="logo"><a href="index.html">TheXProShopping</a></div>
+      <div class="logo">TheXProShopping</div>
       <nav class="navbar">
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="cart.html">Cart 🛒</a></li>
         </ul>
       </nav>
-      <div class="search-bar">
-        <input type="text" id="search" placeholder="Search products..." aria-label="Search products">
-        <button id="search-button" aria-label="Search">🔍</button>
-      </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1>Welcome to TheXProShopping</h1>
-    <p>Shop premium products at unbeatable prices!</p>
-    <button onclick="scrollToProducts()">Start Shopping</button>
-  </section>
+  <main>
+    <section class="hero">
+      <h1>Welcome to TheXPro Shopping</h1>
+      <p>Discover the best products at unbeatable prices!</p>
+      <button onclick="scrollToProducts()">Shop Now</button>
+    </section>
 
-  <!-- Products Section -->
-  <section id="products" class="products">
-    <h2>Our Products</h2>
-    <div id="product-grid" class="product-grid"></div>
-    <div id="loading-message" style="display: none;">Loading products...</div>
-    <div id="error-message" style="display: none; color: red;">Could not load products. Please try again later.</div>
-  </section>
+    <section id="products" class="product-grid">
+      <!-- Products will be dynamically loaded here -->
+    </section>
+  </main>
 
-  <!-- Footer -->
   <footer>
     <p>&copy; 2024 TheXProShopping. All rights reserved.</p>
   </footer>
 
-  <!-- Scripts -->
   <script src="scripts/main.js"></script>
-  <script>
-    function scrollToProducts() {
-      document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-    }
-  </script>
 </body>
 
 </html>
