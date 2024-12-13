@@ -1,45 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheXPro Shopping - Cart</title>
-    <link rel="stylesheet" href="styles/main.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TheXPro Shopping - Cart</title>
+  <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="logo">TheXProShopping</div>
-            <nav class="navbar">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="cart.html">Cart 🛒</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <main>
-        <section class="cart">
-            <h1>Your Cart</h1>
-            <div id="cart-items" class="cart-items">
-                <!-- Cart items will load dynamically -->
-            </div>
-            <div class="cart-summary">
-                <p>Subtotal: $<span id="subtotal">0.00</span></p>
-                <input type="text" id="discount-code" placeholder="Enter discount code">
-                <button id="apply-discount" class="btn">Apply Discount</button>
-                <p>Total: $<span id="total">0.00</span></p>
-                <button id="checkout-btn" class="btn">Proceed to Checkout</button>
-            </div>
-        </section>
-    </main>
+  <!-- Header Section -->
+  <header class="header">
+    <div class="container">
+      <div class="logo">TheXProShopping</div>
+      <nav class="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="cart.html">Cart 🛒</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <footer>
-        <p>&copy; 2024 TheXProShopping. All rights reserved.</p>
-    </footer>
+  <!-- Cart Section -->
+  <main>
+    <section class="cart">
+      <h1>Your Cart</h1>
+      <div id="cart-items" class="cart-items">
+        <!-- Cart items will load dynamically -->
+      </div>
+      <div class="cart-summary">
+        <p>Subtotal: $<span id="subtotal">0.00</span></p>
+        <input type="text" id="discount-code" placeholder="Enter discount code">
+        <button id="apply-discount" class="btn">Apply Discount</button>
+        <p>Total: $<span id="total">0.00</span></p>
+        <button id="checkout-btn" class="btn">Proceed to Checkout</button>
+      </div>
+    </section>
+  </main>
 
-    <script src="scripts/cart.js"></script>
-    <script src="scripts/email.js"></script>
+  <footer>
+    <p>&copy; 2024 TheXProShopping. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="scripts/cart.js"></script>
+  <script src="scripts/email.js"></script>
 </body>
 </html>
