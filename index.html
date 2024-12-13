@@ -4,79 +4,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheXProShopping - Home</title>
+    <title>TheXProShopping</title>
     <style>
-        /* Integrated Styles */
-
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* General Styling */
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
             color: #333;
             line-height: 1.6;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* Header */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
-            background: #fff;
+            padding: 20px 40px;
+            background: #007bff;
+            color: white;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
-            color: #007bff;
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 15px;
+            gap: 20px;
         }
 
         nav ul li a {
-            padding: 5px 10px;
+            color: white;
+            text-decoration: none;
             font-size: 1rem;
-            color: #333;
             transition: color 0.3s ease;
         }
 
         nav ul li a:hover {
-            color: #007bff;
-        }
-
-        .search-bar {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            color: #ffd700;
         }
 
         .search-bar input {
-            padding: 8px 15px;
-            border: 1px solid #ddd;
+            padding: 10px;
+            border: none;
             border-radius: 5px;
-            width: 200px;
+            margin-right: 5px;
         }
 
         .search-bar button {
-            padding: 8px 15px;
-            background: #007bff;
-            color: #fff;
+            padding: 10px 20px;
+            background-color: #ffd700;
+            color: #007bff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -84,47 +66,47 @@
         }
 
         .search-bar button:hover {
-            background: #0056b3;
+            background-color: #ffcf33;
         }
 
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 100px 20px;
-            background: url('public/images/hero.jpg') no-repeat center center/cover;
-            color: #fff;
+            padding: 120px 20px;
+            background: url('public/images/hero-bg.jpg') no-repeat center center/cover;
+            color: white;
         }
 
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
         }
 
         .hero button {
             padding: 15px 30px;
-            background: #007bff;
-            color: #fff;
+            font-size: 1rem;
+            background-color: #ffd700;
+            color: #007bff;
             border: none;
             border-radius: 30px;
-            font-size: 1.2rem;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: background-color 0.3s ease;
         }
 
         .hero button:hover {
-            background: #0056b3;
+            background-color: #ffcf33;
         }
 
-        /* Categories */
+        /* Categories Section */
         .categories {
             padding: 40px 20px;
             text-align: center;
-            background: #fff;
+            background: white;
         }
 
         .categories h2 {
@@ -139,92 +121,80 @@
         }
 
         .category-card {
-            background: #f4f4f4;
+            background: #f9f9f9;
             padding: 20px;
             border-radius: 10px;
-            transition: transform 0.3s ease;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #007bff;
+            font-weight: bold;
             cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
         }
 
         .category-card:hover {
-            transform: scale(1.05);
+            transform: translateY(-5px);
+            background: #ffd700;
+            color: white;
         }
 
         /* Product Grid */
         .product-grid {
             padding: 40px 20px;
-            background: #f8f8f8;
+            background: white;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
+            gap: 30px;
         }
 
         .product-card {
-            background: #fff;
+            background: white;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 15px;
+            padding: 20px;
             text-align: center;
             transition: transform 0.3s ease;
         }
 
         .product-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
         }
 
         .product-card img {
             width: 100%;
             height: 200px;
             object-fit: cover;
-            border-radius: 5px;
+            border-radius: 8px;
+            margin-bottom: 15px;
         }
 
         .product-card h3 {
-            margin: 10px 0;
-            font-size: 1.1rem;
-            color: #333;
-        }
-
-        .product-card p {
-            font-size: 1rem;
-            color: #777;
+            font-size: 1.2rem;
             margin-bottom: 10px;
+            color: #007bff;
         }
 
         .product-card button {
             padding: 10px 20px;
-            background: #007bff;
-            color: #fff;
+            background-color: #007bff;
+            color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         .product-card button:hover {
-            background: #0056b3;
+            background-color: #0056b3;
         }
 
         /* Footer */
         footer {
             text-align: center;
             padding: 20px;
-            background: #f4f4f4;
-            margin-top: 40px;
-        }
-
-        footer .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        footer .social-links a {
-            font-size: 1.5rem;
-            color: #333;
-        }
-
-        footer .social-links a:hover {
-            color: #007bff;
+            background: #f9f9f9;
+            color: #777;
         }
     </style>
 </head>
@@ -254,7 +224,7 @@
         <button onclick="window.location.href='#products'">Shop Now</button>
     </section>
 
-    <!-- Categories -->
+    <!-- Categories Section -->
     <section class="categories">
         <h2>Shop by Category</h2>
         <div class="category-grid">
@@ -266,18 +236,11 @@
     </section>
 
     <!-- Product Grid -->
-    <section id="products" class="product-grid">
-        <!-- Products dynamically loaded here -->
-    </section>
+    <section id="products" class="product-grid"></section>
 
     <!-- Footer -->
     <footer>
         <p>&copy; 2024 TheXProShopping. All rights reserved.</p>
-        <div class="social-links">
-            <a href="#">Facebook</a>
-            <a href="#">Instagram</a>
-            <a href="#">Twitter</a>
-        </div>
     </footer>
 
     <script>
@@ -287,7 +250,7 @@
                 const products = await response.json();
                 displayProducts(products);
             } catch (error) {
-                console.error('Error fetching products:', error);
+                console.error('Error loading products:', error);
                 alert('Failed to load products.');
             }
         }
@@ -308,12 +271,25 @@
         }
 
         function addToCart(productId) {
-            alert(`Product ${productId} added to cart!`);
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const product = cart.find(item => item.id === productId);
+            if (product) {
+                product.quantity++;
+            } else {
+                cart.push({ id: productId, quantity: 1 });
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('Product added to cart.');
         }
 
         function searchProducts() {
-            const query = document.getElementById('searchInput').value;
-            alert(`Searching for: ${query}`);
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const productGrid = document.getElementById('products');
+            const productCards = productGrid.querySelectorAll('.product-card');
+            productCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                card.style.display = title.includes(query) ? '' : 'none';
+            });
         }
 
         window.onload = loadProducts;
